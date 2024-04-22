@@ -1,0 +1,8 @@
+* [首页](/)
+* [type对应的类别](/type)
+* [发送短信验证码](/sendCode)
+* [短信登录](/login)
+* [刷新token](/refreshToken)
+* [搜索](/search)
+* [我的订阅](/subscription)
+* [查询节目列表](/episodeList)
