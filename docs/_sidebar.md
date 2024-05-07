@@ -6,3 +6,4 @@
 * [搜索](/search)
 * [我的订阅](/subscription)
 * [查询节目列表](/episodeList)
+* [查询单集详情](/episodeDetail)
