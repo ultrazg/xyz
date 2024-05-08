@@ -40,6 +40,8 @@ $ go run . -p 3000
 $ go run . -d
 ```
 
+> 接口地址：http://localhost:{{port}}/login
+>
 > 文档地址：http://localhost:{{port}}/doc
 
 
