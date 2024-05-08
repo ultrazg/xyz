@@ -14,4 +14,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/refresh_token", handlers.RefreshToken)   // 刷新 token
 	engine.POST("/episode_list", handlers.EpisodeList)     // 剧集列表
 	engine.POST("/episode_detail", handlers.EpisodeDetail) // 查询单集详情
+	engine.POST("/podcast_detail", handlers.PodcastDetail) // 查询节目详情
 }
