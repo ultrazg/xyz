@@ -38,6 +38,7 @@
 | description       | string | 描述                                               |
 | podcasters        | array  | 播客嘉宾的信息（头像、昵称和 uid 等）              |
 | image             | object | 节目封面                                           |
+| color             | object | 节目主题色                                         |
 | ...               | ...    | ...                                                |
 
 
