@@ -37,7 +37,7 @@ var Login = func(ctx *gin.Context) {
 		params.AreaCode = "+86"
 	}
 
-	p := map[string]string{
+	p := map[string]any{
 		"areaCode":          params.AreaCode,
 		"verifyCode":        params.VerifyCode,
 		"mobilePhoneNumber": params.MobilePhoneNumber,

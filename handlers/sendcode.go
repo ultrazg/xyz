@@ -35,7 +35,7 @@ var SendCode = func(ctx *gin.Context) {
 		params.AreaCode = "+86"
 	}
 
-	p := map[string]string{
+	p := map[string]any{
 		"mobilePhoneNumber": params.MobilePhoneNumber,
 		"areaCode":          params.AreaCode,
 	}

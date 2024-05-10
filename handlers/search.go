@@ -39,7 +39,7 @@ var Search = func(ctx *gin.Context) {
 
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
-	p := map[string]string{
+	p := map[string]any{
 		"limit":           "20", // TODO: limit不写死
 		"sourcePageName":  "4",
 		"type":            "ALL",

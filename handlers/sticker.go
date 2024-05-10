@@ -33,7 +33,7 @@ var StickerList = func(ctx *gin.Context) {
 		return
 	}
 
-	p := map[string]string{
+	p := map[string]any{
 		"uid": params.Uid,
 	}
 	now := time.Now()

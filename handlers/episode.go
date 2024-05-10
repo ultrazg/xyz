@@ -36,7 +36,7 @@ var EpisodeList = func(ctx *gin.Context) {
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	url := constant.BaseUrl + "/v1/episode/list"
-	p := map[string]string{
+	p := map[string]any{
 		// TODO: 接收 loadMoreKey 对象用于翻页
 		"limit": "20",
 		"pid":   params.Pid,

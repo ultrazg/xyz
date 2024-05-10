@@ -99,7 +99,7 @@ var RelatedPodcastList = func(ctx *gin.Context) {
 		return
 	}
 
-	p := map[string]string{
+	p := map[string]any{
 		"pid":      params.Pid,
 		"position": "BOTTOM",
 	}
