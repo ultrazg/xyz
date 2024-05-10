@@ -17,4 +17,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/podcast_detail", handlers.PodcastDetail)       // 查询节目详情
 	engine.POST("/podcast_related", handlers.RelatedPodcastList) // 相关节目推荐
 	engine.POST("/profile", handlers.Profile)                    // 查询我的信息
+	engine.POST("/sticker", handlers.StickerList)                // 查询我的信息
 }

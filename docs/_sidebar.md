@@ -10,3 +10,4 @@
 * [查询节目详情](/podcastDetail)
 * [相关节目推荐](/podcastRelated)
 * [查询我的信息](/profile)
+* [我的贴纸](/sticker)
