@@ -1,8 +1,6 @@
 ### 搜索
 
-搜索内容
-> 目前暂不支持指定类别搜索以及分页
-
+搜索内容。支持搜索的类别有**全部（ALL）**、**节目（PODCAST）**、**单集（EPISODE）**和**用户（USER）**，其中**单集**可分页查询
 #### 请求地址
 
 > /search
@@ -23,9 +21,11 @@
 
 #### 请求参数
 
-| 参数    | 必填 | 类型   | 说明                       |
-| :------ | :--- | :----- | -------------------------- |
-| keyword | true | string | 要搜索的内容，支持模糊查询 |
+| 参数        | 必填  | 类型   | 说明                                                         |
+| :---------- | :---- | :----- | ------------------------------------------------------------ |
+| keyword     | true  | string | 要搜索的内容，支持模糊查询                                   |
+| type        | true  | string | 要搜索的类别（全部：ALL、节目：PODCAST、单集：EPISODE、用户：USER） |
+| loadMoreKey | false | object | 分页查询的条件，由接口返回                                   |
 
 #### 返回字段
 
@@ -40,6 +40,7 @@
 |description|string|描述|
 |media|object|播客音频信息（大小、链接等）|
 |podcasters|array|播客嘉宾的信息（头像、昵称和uid等）|
+|loadMoreKey|object|如果存在下一页，则会返回该对象。将这个对象传入请求参数，便可实现分页查询|
 |...|...|...|
 
 
@@ -51,13 +52,21 @@
 
 ```javascript
 {
-  "keyword": "小米"
+  "keyword": "小米",
+  // 搜索的类别，全部（ALL）、节目（PODCAST）、单集（EPISODE）和用户（USER）
+  "type": "EPISODE",
+  // 分页条件，查询单集时可用
+  "loadMoreKey": {
+    "loadMoreKey": 20,
+    "searchId": "1715613951069"
+  }
 }
 ```
 
 响应
 
 ``` javascript
+// 示例为查询全部（ALL）类别
 {
   code: 200,
   msg: "OK",

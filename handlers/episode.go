@@ -10,7 +10,14 @@ import (
 )
 
 type EpisodeListRequestBody struct {
-	Pid string `json:"pid" form:"pid"`
+	Pid         string              `json:"pid" form:"pid"`
+	LoadMoreKey *episodeLoadMoreKey `json:"loadMoreKey" form:"loadMoreKey"`
+}
+
+type episodeLoadMoreKey struct {
+	PubDate   string `json:"pubDate" form:"pubDate"`
+	Id        string `json:"id" form:"id"`
+	Direction string `json:"direction" form:"direction"`
 }
 
 // EpisodeList 查询节目列表
@@ -33,14 +40,22 @@ var EpisodeList = func(ctx *gin.Context) {
 		return
 	}
 
-	now := time.Now()
-	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
-	url := constant.BaseUrl + "/v1/episode/list"
 	p := map[string]any{
-		// TODO: 接收 loadMoreKey 对象用于翻页
 		"limit": "20",
 		"pid":   params.Pid,
 	}
+
+	if params.LoadMoreKey != nil {
+		p["loadMoreKey"] = map[string]string{
+			"pubDate":   params.LoadMoreKey.PubDate,
+			"id":        params.LoadMoreKey.Id,
+			"direction": params.LoadMoreKey.Direction,
+		}
+	}
+
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/episode/list"
 	headers := map[string]string{
 		"Host":                        "api.xiaoyuzhoufm.com",
 		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",

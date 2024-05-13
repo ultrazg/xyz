@@ -10,11 +10,14 @@ import (
 )
 
 type SearchRequestBody struct {
-	//SourcePageName  string `json:"sourcePageName" form:"sourcePageName"`
-	//Limit           string `json:"limit" form:"limit"`
-	//Type            string `json:"type" form:"type"`
-	//CurrentPageName string `json:"currentPageName" form:"currentPageName"`
-	Keyword string `json:"keyword" form:"keyword"`
+	Type        string             `json:"type" form:"type"`
+	Keyword     string             `json:"keyword" form:"keyword"`
+	LoadMoreKey *searchLoadMoreKey `json:"loadMoreKey" form:"loadMoreKey"`
+}
+
+type searchLoadMoreKey struct {
+	LoadMoreKey int    `json:"loadMoreKey" form:"loadMoreKey"`
+	SearchId    string `json:"searchId" form:"searchId"`
 }
 
 // Search 搜索
@@ -31,21 +34,29 @@ var Search = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if XJikeAccessToken == "" || params.Keyword == "" {
+	if XJikeAccessToken == "" || params.Keyword == "" || params.Type == "" {
 		U.ReturnBadRequest(ctx, nil)
 
 		return
 	}
 
-	now := time.Now()
-	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	p := map[string]any{
-		"limit":           "20", // TODO: limit不写死
+		"limit":           "20",
 		"sourcePageName":  "4",
-		"type":            "ALL",
+		"type":            params.Type,
 		"currentPageName": "4",
 		"keyword":         params.Keyword,
 	}
+
+	if params.LoadMoreKey != nil {
+		p["loadMoreKey"] = map[string]any{
+			"loadMoreKey": params.LoadMoreKey.LoadMoreKey,
+			"searchId":    params.LoadMoreKey.SearchId,
+		}
+	}
+
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	url := C.BaseUrl + "/v1/search/create"
 	headers := map[string]string{
 		"Host":                        "api.xiaoyuzhoufm.com",
