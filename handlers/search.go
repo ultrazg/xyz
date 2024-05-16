@@ -34,7 +34,7 @@ var Search = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if XJikeAccessToken == "" || params.Keyword == "" || params.Type == "" {
+	if params.Keyword == "" || params.Type == "" {
 		U.ReturnBadRequest(ctx, nil)
 
 		return

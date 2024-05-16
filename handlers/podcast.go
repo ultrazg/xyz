@@ -27,7 +27,7 @@ var PodcastDetail = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if params.Pid == "" || XJikeAccessToken == "" {
+	if params.Pid == "" {
 		utils.ReturnBadRequest(ctx, nil)
 
 		return
@@ -93,7 +93,7 @@ var RelatedPodcastList = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if params.Pid == "" || XJikeAccessToken == "" {
+	if params.Pid == "" {
 		utils.ReturnBadRequest(ctx, nil)
 
 		return

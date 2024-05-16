@@ -34,7 +34,7 @@ var EpisodeList = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if params.Pid == "" || XJikeAccessToken == "" {
+	if params.Pid == "" {
 		utils.ReturnBadRequest(ctx, nil)
 
 		return
@@ -114,7 +114,7 @@ var EpisodeDetail = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if params.Eid == "" || XJikeAccessToken == "" {
+	if params.Eid == "" {
 		utils.ReturnBadRequest(ctx, nil)
 
 		return

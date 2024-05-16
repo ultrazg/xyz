@@ -27,7 +27,7 @@ var StickerList = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if params.Uid == "" || XJikeAccessToken == "" {
+	if params.Uid == "" {
 		utils.ReturnBadRequest(ctx, nil)
 
 		return

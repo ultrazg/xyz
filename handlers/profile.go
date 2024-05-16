@@ -13,13 +13,6 @@ import (
 var Profile = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
-
-	if XJikeAccessToken == "" {
-		utils.ReturnBadRequest(ctx, nil)
-
-		return
-	}
-
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	url := constant.BaseUrl + "/v1/profile/get"

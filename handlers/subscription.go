@@ -13,12 +13,6 @@ import (
 var Subscription = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XjikeAccessToken := h.Get("x-jike-access-token")
-
-	if XjikeAccessToken == "" {
-		U.ReturnBadRequest(ctx, nil)
-
-		return
-	}
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	p := map[string]any{
