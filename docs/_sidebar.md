@@ -13,3 +13,4 @@
 * [查询我的信息](/profile)
 * [我的贴纸](/sticker)
 * [我的贴纸墙](/stickerBoard)
+* [查询单集播放进度](/episodePlayProgress)

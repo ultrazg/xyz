@@ -7,18 +7,19 @@ import (
 )
 
 func RegisterRouters(engine *gin.Engine) {
-	engine.Static("/doc", "../docs")                                                       // 文档
-	engine.POST("/sendCode", handlers.SendCode)                                            // 发送验证码
-	engine.POST("/login", handlers.Login)                                                  // 验证码登录
-	engine.POST("/subscription", utils.CheckAccessToken(), handlers.Subscription)          // 订阅列表
-	engine.POST("/search", utils.CheckAccessToken(), handlers.Search)                      // 搜索
-	engine.POST("/search_preset", utils.CheckAccessToken(), handlers.SearchPreset)         // 「你可能想搜的内容」
-	engine.POST("/refresh_token", handlers.RefreshToken)                                   // 刷新 token
-	engine.POST("/episode_list", utils.CheckAccessToken(), handlers.EpisodeList)           // 剧集列表
-	engine.POST("/episode_detail", utils.CheckAccessToken(), handlers.EpisodeDetail)       // 查询单集详情
-	engine.POST("/podcast_detail", utils.CheckAccessToken(), handlers.PodcastDetail)       // 查询节目详情
-	engine.POST("/podcast_related", utils.CheckAccessToken(), handlers.RelatedPodcastList) // 相关节目推荐
-	engine.POST("/profile", utils.CheckAccessToken(), handlers.Profile)                    // 查询我的信息
-	engine.POST("/sticker", utils.CheckAccessToken(), handlers.StickerList)                // 查询我的贴纸
-	engine.POST("/sticker_board", utils.CheckAccessToken(), handlers.StickerBoard)         // 查询我的贴纸墙
+	engine.Static("/doc", "../docs")                                                           // 文档
+	engine.POST("/sendCode", handlers.SendCode)                                                // 发送验证码
+	engine.POST("/login", handlers.Login)                                                      // 验证码登录
+	engine.POST("/subscription", utils.CheckAccessToken(), handlers.Subscription)              // 订阅列表
+	engine.POST("/search", utils.CheckAccessToken(), handlers.Search)                          // 搜索
+	engine.POST("/search_preset", utils.CheckAccessToken(), handlers.SearchPreset)             // 「你可能想搜的内容」
+	engine.POST("/refresh_token", handlers.RefreshToken)                                       // 刷新 token
+	engine.POST("/episode_list", utils.CheckAccessToken(), handlers.EpisodeList)               // 剧集列表
+	engine.POST("/episode_detail", utils.CheckAccessToken(), handlers.EpisodeDetail)           // 查询单集详情
+	engine.POST("/podcast_detail", utils.CheckAccessToken(), handlers.PodcastDetail)           // 查询节目详情
+	engine.POST("/podcast_related", utils.CheckAccessToken(), handlers.RelatedPodcastList)     // 相关节目推荐
+	engine.POST("/profile", utils.CheckAccessToken(), handlers.Profile)                        // 查询我的信息
+	engine.POST("/sticker", utils.CheckAccessToken(), handlers.StickerList)                    // 查询我的贴纸
+	engine.POST("/sticker_board", utils.CheckAccessToken(), handlers.StickerBoard)             // 查询我的贴纸墙
+	engine.POST("/episode_play_progress", utils.CheckAccessToken(), handlers.PlaybackProgress) // 查询单集播放进度
 }
