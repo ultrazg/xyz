@@ -74,4 +74,4 @@ $ go run . -d
 
 ## License
 
-[The MIT License](https://github.com/ultrazg/xyz?tab=MIT-1-ov-file)
+[The MIT License](https://github.com/ultrazg/xyz/blob/dev/LICENSE)
