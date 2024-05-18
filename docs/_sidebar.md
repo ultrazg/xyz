@@ -14,3 +14,5 @@
 * [我的贴纸](/sticker)
 * [我的贴纸墙](/stickerBoard)
 * [查询单集播放进度](/episodePlayProgress)
+* [查询单集的评论](/commentPrimary)
+* [查询回复评论](/commentThread)
