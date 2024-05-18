@@ -4,6 +4,7 @@
 * [短信登录](/login)
 * [刷新token](/refreshToken)
 * [搜索](/search)
+* [「你可能想搜的内容」](/searchPreset)
 * [我的订阅](/subscription)
 * [查询单集列表](/episodeList)
 * [查询单集详情](/episodeDetail)
@@ -11,3 +12,4 @@
 * [相关节目推荐](/podcastRelated)
 * [查询我的信息](/profile)
 * [我的贴纸](/sticker)
+* [我的贴纸墙](/stickerBoard)
