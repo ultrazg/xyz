@@ -25,4 +25,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/comment_primary", utils.CheckAccessToken(), handlers.CommentPrimary)         // 查询单集的评论
 	engine.POST("/comment_thread", utils.CheckAccessToken(), handlers.CommentThread)           // 查询回复评论
 	engine.POST("/discovery", utils.CheckAccessToken(), handlers.Discovery)                    // 首页榜单、精选节目、推荐等
+	engine.POST("/episode_live_count", utils.CheckAccessToken(), handlers.Live)                // 正在收听的人数
 }
