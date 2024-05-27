@@ -19,3 +19,4 @@
 * [首页榜单、精选节目、推荐等](/discovery)
 * [正在收听的人数](/episodeLiveCount)
 * [精彩时间点](/episodeClap)
+* [标记精彩时间点](/episodeClapCreate)
