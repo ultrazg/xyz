@@ -29,4 +29,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/episode_clap", utils.CheckAccessToken(), handlers.Clap)                      // 精彩时间点
 	engine.POST("/episode_clap_create", utils.CheckAccessToken(), handlers.CreateClap)         // 标记精彩时间点
 	engine.POST("/inbox_list", utils.CheckAccessToken(), handlers.InboxList)                   // 订阅更新列表
+	engine.POST("/category_list", utils.CheckAccessToken(), handlers.CategoryList)             // 全部分类
 }

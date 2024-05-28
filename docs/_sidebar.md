@@ -21,3 +21,4 @@
 * [精彩时间点](/episodeClap)
 * [标记精彩时间点](/episodeClapCreate)
 * [订阅更新列表](/inboxList)
+* [全部分类](/categoryList)
