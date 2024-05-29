@@ -23,3 +23,4 @@
 * [订阅更新列表](/inboxList)
 * [全部分类](/categoryList)
 * [分类下的标签](/categoryListTab)
+* [分类下的节目列表](/categoryPodcastList)
