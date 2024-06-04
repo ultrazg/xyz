@@ -172,3 +172,139 @@ var CommentThread = func(ctx *gin.Context) {
 
 	utils.ReturnJson(response, ctx)
 }
+
+type CommentCollect struct {
+	CommentId string `form:"commentId"`
+}
+
+// CreateCommentCollect 收藏评论
+var CreateCommentCollect = func(ctx *gin.Context) {
+	var params *CommentCollect
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	if params.CommentId == "" {
+		utils.ReturnBadRequest(ctx, nil)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+	p := map[string]any{
+		"commentId": params.CommentId,
+	}
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/comment/collect/create"
+	headers := map[string]string{
+		"Host":                        "api.xiaoyuzhoufm.com",
+		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
+		"Market":                      "AppStore",
+		"App-BuildNo":                 "1576",
+		"OS":                          "ios",
+		"x-jike-access-token":         XJikeAccessToken,
+		"Manufacturer":                "Apple",
+		"BundleID":                    "app.podcast.cosmos",
+		"Connection":                  "keep-alive",
+		"abtest-info":                 "{\"old_user_discovery_feed\":\"enable\"}",
+		"Accept-Language":             "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
+		"X-Online-Host":               "api.xiaoyuzhoufm.com",
+		"Model":                       "iPhone14,2",
+		"app-permissions":             "4",
+		"Accept":                      "*/*",
+		"Content-Type":                "application/json",
+		"App-Version":                 "2.57.1",
+		"WifiConnected":               "true",
+		"OS-Version":                  "17.4.1",
+		"x-custom-xiaoyuzhou-app-dev": "",
+		"Local-Time":                  isoTime,
+		"Timezone":                    "Asia/Shanghai",
+	}
+
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/comment/collect/create", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}
+
+// RemoveCommentCollect 取消已收藏评论
+var RemoveCommentCollect = func(ctx *gin.Context) {
+	var params *CommentCollect
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	if params.CommentId == "" {
+		utils.ReturnBadRequest(ctx, nil)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+	p := map[string]any{
+		"commentId": params.CommentId,
+	}
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/comment/collect/remove"
+	headers := map[string]string{
+		"Host":                        "api.xiaoyuzhoufm.com",
+		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
+		"Market":                      "AppStore",
+		"App-BuildNo":                 "1576",
+		"OS":                          "ios",
+		"x-jike-access-token":         XJikeAccessToken,
+		"Manufacturer":                "Apple",
+		"BundleID":                    "app.podcast.cosmos",
+		"Connection":                  "keep-alive",
+		"abtest-info":                 "{\"old_user_discovery_feed\":\"enable\"}",
+		"Accept-Language":             "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
+		"X-Online-Host":               "api.xiaoyuzhoufm.com",
+		"Model":                       "iPhone14,2",
+		"app-permissions":             "4",
+		"Accept":                      "*/*",
+		"Content-Type":                "application/json",
+		"App-Version":                 "2.57.1",
+		"WifiConnected":               "true",
+		"OS-Version":                  "17.4.1",
+		"x-custom-xiaoyuzhou-app-dev": "",
+		"Local-Time":                  isoTime,
+		"Timezone":                    "Asia/Shanghai",
+	}
+
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/comment/collect/remove", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}

@@ -19,6 +19,8 @@
 * [查询单集播放进度](/episodePlayProgress)
 * [查询单集的评论](/commentPrimary)
 * [查询回复评论](/commentThread)
+* [收藏评论](/commentCollectCreate)
+* [取消已收藏评论](/commentCollectRemove)
 * [首页榜单、精选节目、推荐等](/discovery)
 * [正在收听的人数](/episodeLiveCount)
 * [精彩时间点](/episodeClap)
@@ -27,3 +29,4 @@
 * [全部分类](/categoryList)
 * [分类下的标签](/categoryListTab)
 * [分类下的节目列表](/categoryPodcastList)
+* [更新收藏单集](/updateEpisodeFavorite)

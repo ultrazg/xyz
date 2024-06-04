@@ -164,8 +164,8 @@ var NonStarredSubscription = func(ctx *gin.Context) {
 }
 
 type UpdateStarSubscriptionRequestBody struct {
-	Pid      string `json:"pid"`
-	WithStar bool   `json:"withStar"`
+	Pid      string `form:"pid"`
+	WithStar bool   `form:"withStar"`
 }
 
 // UpdateStarSubscription 更新星标订阅列表

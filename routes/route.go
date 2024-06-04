@@ -27,6 +27,8 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/episode_play_progress", utils.CheckAccessToken(), handlers.PlaybackProgress)          // 查询单集播放进度
 	engine.POST("/comment_primary", utils.CheckAccessToken(), handlers.CommentPrimary)                  // 查询单集的评论
 	engine.POST("/comment_thread", utils.CheckAccessToken(), handlers.CommentThread)                    // 查询回复评论
+	engine.POST("/comment_collect_create", utils.CheckAccessToken(), handlers.CreateCommentCollect)     // 收藏评论
+	engine.POST("/comment_collect_remove", utils.CheckAccessToken(), handlers.RemoveCommentCollect)     // 取消收藏评论
 	engine.POST("/discovery", utils.CheckAccessToken(), handlers.Discovery)                             // 首页榜单、精选节目、推荐等
 	engine.POST("/episode_live_count", utils.CheckAccessToken(), handlers.Live)                         // 正在收听的人数
 	engine.POST("/episode_clap", utils.CheckAccessToken(), handlers.Clap)                               // 精彩时间点
@@ -35,4 +37,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/category_list", utils.CheckAccessToken(), handlers.CategoryList)                      // 全部分类
 	engine.POST("/category_list_tab", utils.CheckAccessToken(), handlers.CategoryListTabById)           // 获取分类下的标签
 	engine.POST("/category_podcast_list", utils.CheckAccessToken(), handlers.CategoryPodcastListByTab)  // 根据标签获取分类下的节目列表
+	engine.POST("/favorite_episode_update", utils.CheckAccessToken(), handlers.UpdateEpisodeFavorite)   // 更新收藏单集
 }
