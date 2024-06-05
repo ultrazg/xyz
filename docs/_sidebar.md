@@ -32,3 +32,4 @@
 * [分类下的节目列表](/categoryPodcastList)
 * [更新收藏单集](/updateEpisodeFavorite)
 * [查询收藏单集列表](/episodeFavoriteList)
+* [收听历史](/episodePlayedHistoryList)
