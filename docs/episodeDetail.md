@@ -28,21 +28,24 @@
 
 #### 返回字段
 
-| 返回字段    | 类型   | 说明                                             |
-| :---------- | :----- | :----------------------------------------------- |
+| 返回字段    | 类型   | 说明                           |
+| :---------- | :----- |:-----------------------------|
 | type        | string | 类别。节目、单集等，详情看 type 对应的类别说明文档 |
-| pid         | string | 该单集所属的节目 id                               |
-| eid         | string | 当前单集的 id                                    |
-| title       | string | 标题                                             |
-| commentCount| number | 评论数                                          |
-| playCount | number | 播放量 |
-| duration | number | 时长 |
-| shownotes   | string | 详情                                             |
-| description | string | 描述                                             |
-| media       | object | 播客音频信息（大小、链接等）                     |
-| podcast       | object | 当前单集所属的节目信息                         |
-| podcast.podcasters  | array  | 播客嘉宾的信息（头像、昵称和 uid 等）     |
-| ...         | ...    | ...                                              |
+| pid         | string | 该单集所属的节目 id                  |
+| eid         | string | 当前单集的 id                     |
+| title       | string | 标题                           |
+| commentCount| number | 评论数                          |
+| playCount | number | 播放量                          |
+| duration | number | 时长                           |
+| shownotes   | string | 详情                           |
+| description | string | 描述                           |
+| media       | object | 播客音频信息（大小、链接等）               |
+| podcast       | object | 当前单集所属的节目信息                  |
+| podcast.podcasters  | array  | 播客嘉宾的信息（头像、昵称和 uid 等）        |
+| isCustomized | boolean | 是否定制                         |
+| isFavorited | boolean | 是否收藏                         |
+| isFinished | boolean | 是否已听完                        |
+| ...         | ...    | ...                          |
 
 
 #### 示例

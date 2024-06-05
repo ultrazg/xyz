@@ -33,3 +33,4 @@
 * [更新收藏单集](/updateEpisodeFavorite)
 * [查询收藏单集列表](/episodeFavoriteList)
 * [收听历史](/episodePlayedHistoryList)
+* [未读消息](/unreadCount)

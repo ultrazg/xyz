@@ -41,4 +41,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/favorite_episode_update", utils.CheckAccessToken(), handlers.UpdateEpisodeFavorite)        // 更新收藏单集
 	engine.POST("/favorite_episode_list", utils.CheckAccessToken(), handlers.FavoriteEpisodeList)            // 获取收藏单集列表
 	engine.POST("/episode_played_history_list", utils.CheckAccessToken(), handlers.EpisodePlayedHistoryList) // 收听历史
+	engine.POST("/unread_count", utils.CheckAccessToken(), handlers.UnreadCount)                             // 未读消息
 }
