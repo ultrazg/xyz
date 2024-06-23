@@ -7,7 +7,8 @@ import (
 )
 
 func RegisterRouters(engine *gin.Engine) {
-	engine.Static("/doc", "../docs")                                                                         // 文档
+	engine.Static("/doc", "../docs") // 文档
+	engine.GET("/ping", handlers.Pong)
 	engine.POST("/sendCode", handlers.SendCode)                                                              // 发送验证码
 	engine.POST("/login", handlers.Login)                                                                    // 验证码登录
 	engine.POST("/subscription", utils.CheckAccessToken(), handlers.Subscription)                            // 订阅列表
