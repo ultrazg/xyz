@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  xyz:
+    image: ultrazg/xyz:v1.4.2
+    ports:
+      - "8080:8080"
