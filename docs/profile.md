@@ -1,6 +1,6 @@
-### 查询我的信息
+### 查询登录用户信息
 
-查询已登录账号的个人信息
+查询用户个人信息
 
 #### 请求地址
 
@@ -26,16 +26,16 @@
 
 #### 返回字段
 
-| 返回字段       | 类型   | 说明                                               |
-| :------------- | :----- | :------------------------------------------------- |
-| type           | string | 类别。节目、单集等，详情看 type 对应的类别说明文档 |
-| uid            | string | 当前登录用户的 uid                                 |
-| avatar         | object | 登录用户的头像信息                                 |
-| nickname       | string | 昵称                                               |
-| wechatUserInfo | object | 绑定的微信信息                                     |
+| 返回字段       | 类型   | 说明                                           |
+| :------------- | :----- |:---------------------------------------------|
+| type           | string | 类别。节目、单集等，详情看 type 对应的类别说明文档                 |
+| uid            | string | 用户的 uid                                      |
+| avatar         | object | 用户的头像信息                                      |
+| nickname       | string | 昵称                                           |
+| wechatUserInfo | object | 绑定的微信信息                                      |
 | phoneNumber    | object | 绑定的手机号                                       |
-| jikeUserInfo   | object | 绑定的即刻 APP 信息                                |
-| ...            | ...    | ...                                                |
+| jikeUserInfo   | object | 绑定的即刻 APP 信息                                 |
+| ...            | ...    | ...                                          |
 
 
 #### 示例
@@ -48,7 +48,7 @@
 {
   "data": {
     "type": "USER",
-    "uid": "YOUR-UID",
+    "uid": "UID",
     "avatar": {
       "picture": {
         "picUrl": "https://www.example.com",
