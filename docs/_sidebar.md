@@ -23,6 +23,7 @@
 * [取消已收藏评论](/commentCollectRemove)
 * [查询已收藏评论](/commentCollectList)
 * [首页榜单、精选节目、推荐等](/discovery)
+* [首页-刷新「大家都在听」推荐](/refreshEpisodeRecommend)
 * [正在收听的人数](/episodeLiveCount)
 * [精彩时间点](/episodeClap)
 * [标记精彩时间点](/episodeClapCreate)
@@ -35,4 +36,4 @@
 * [收听历史](/episodePlayedHistoryList)
 * [未读消息](/unreadCount)
 * [用户统计数据](/userStats)
-* [未读消息](/unreadCount)
+* [查询用户信息](/getProfile)
