@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/pkg/utils"
+	"github.com/ultrazg/xyz/utils"
 	"io"
 	"log"
 	"net/http"

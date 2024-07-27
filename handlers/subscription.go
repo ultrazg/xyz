@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	C "github.com/ultrazg/xyz/constant"
-	U "github.com/ultrazg/xyz/pkg/utils"
+	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
@@ -16,7 +16,7 @@ var Subscription = func(ctx *gin.Context) {
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	p := map[string]any{
-		"limit":     "20", // TODO: limit不写死
+		"limit":     "20", // TODO: limit不写死，可以根据 uid 查询订阅
 		"sortOrder": "desc",
 		"sortBy":    "subscribedAt",
 	}
@@ -47,20 +47,20 @@ var Subscription = func(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json; charset=utf-8")
 
-	res, code, err := U.Request(url, http.MethodPost, p, headers)
+	res, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
-			"msg":  U.GetMsg(code),
+			"msg":  utils.GetMsg(code),
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/subscription/list", code, U.GetMsg(code))
+		log.Println("/v1/subscription/list", code, utils.GetMsg(code))
 
 		return
 	}
 
-	U.ReturnJson(res, ctx)
+	utils.ReturnJson(res, ctx)
 }
 
 // StarSubscription 星标订阅
@@ -97,20 +97,20 @@ var StarSubscription = func(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json; charset=utf-8")
 
-	res, code, err := U.Request(url, http.MethodPost, p, headers)
+	res, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
-			"msg":  U.GetMsg(code),
+			"msg":  utils.GetMsg(code),
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/subscription-star/list", code, U.GetMsg(code))
+		log.Println("/v1/subscription-star/list", code, utils.GetMsg(code))
 
 		return
 	}
 
-	U.ReturnJson(res, ctx)
+	utils.ReturnJson(res, ctx)
 }
 
 // NonStarredSubscription 未加星标的订阅
@@ -147,20 +147,20 @@ var NonStarredSubscription = func(ctx *gin.Context) {
 
 	ctx.Header("Content-Type", "application/json; charset=utf-8")
 
-	res, code, err := U.Request(url, http.MethodPost, p, headers)
+	res, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
-			"msg":  U.GetMsg(code),
+			"msg":  utils.GetMsg(code),
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/subscription/list-non-starred", code, U.GetMsg(code))
+		log.Println("/v1/subscription/list-non-starred", code, utils.GetMsg(code))
 
 		return
 	}
 
-	U.ReturnJson(res, ctx)
+	utils.ReturnJson(res, ctx)
 }
 
 type UpdateStarSubscriptionRequestBody struct {
@@ -174,7 +174,7 @@ var UpdateStarSubscription = func(ctx *gin.Context) {
 
 	err := ctx.ShouldBind(&params)
 	if err != nil {
-		U.ReturnBadRequest(ctx, err)
+		utils.ReturnBadRequest(ctx, err)
 
 		return
 	}
@@ -183,7 +183,7 @@ var UpdateStarSubscription = func(ctx *gin.Context) {
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
 	if params.Pid == "" {
-		U.ReturnBadRequest(ctx, nil)
+		utils.ReturnBadRequest(ctx, nil)
 
 		return
 	}
@@ -219,18 +219,18 @@ var UpdateStarSubscription = func(ctx *gin.Context) {
 		"Timezone":                    "Asia/Shanghai",
 	}
 
-	res, code, err := U.Request(url, http.MethodPost, p, headers)
+	res, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
-			"msg":  U.GetMsg(code),
+			"msg":  utils.GetMsg(code),
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/subscription-star/update", code, U.GetMsg(code))
+		log.Println("/v1/subscription-star/update", code, utils.GetMsg(code))
 
 		return
 	}
 
-	U.ReturnJson(res, ctx)
+	utils.ReturnJson(res, ctx)
 }

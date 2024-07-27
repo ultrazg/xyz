@@ -16,7 +16,7 @@ Go 1.22.0 <img alt="Static Badge" src="https://img.shields.io/badge/Go-1.22.0-bl
 
 ```shell
 $ git clone git@github.com:ultrazg/xyz.git
-$ cd xyz/cmd
+$ cd xyz
 $ go mod tidy
 ```
 
@@ -42,7 +42,7 @@ $ go run . -d
 
 > 接口地址：http://localhost:{{port}}/login
 >
-> 文档地址：http://localhost:{{port}}/doc
+> 文档地址：http://localhost:{{port}}/docs
 
 
 

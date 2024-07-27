@@ -4,7 +4,7 @@
 
 #### 图示
 
-<img src="./episode_clap.jpeg" alt="episode_clap">
+<img src="episode_clap.jpeg" alt="episode_clap">
 
 #### 请求地址
 

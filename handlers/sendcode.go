@@ -1,12 +1,12 @@
 package handlers
 
 import (
+	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
 	C "github.com/ultrazg/xyz/constant"
-	U "github.com/ultrazg/xyz/pkg/utils"
 )
 
 type SendCodeRequestBody struct {
@@ -20,13 +20,13 @@ var SendCode = func(ctx *gin.Context) {
 
 	err := ctx.ShouldBind(&params)
 	if err != nil {
-		U.ReturnBadRequest(ctx, err)
+		utils.ReturnBadRequest(ctx, err)
 
 		return
 	}
 
 	if params.MobilePhoneNumber == "" {
-		U.ReturnBadRequest(ctx, nil)
+		utils.ReturnBadRequest(ctx, nil)
 
 		return
 	}
@@ -63,18 +63,18 @@ var SendCode = func(ctx *gin.Context) {
 		"x-custom-xiaoyuzhou-app-dev": "",
 	}
 
-	res, code, err := U.Request(url, http.MethodPost, p, headers)
+	res, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
-			"msg":  U.GetMsg(code),
+			"msg":  utils.GetMsg(code),
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/auth/sendCode", code, U.GetMsg(code))
+		log.Println("/v1/auth/sendCode", code, utils.GetMsg(code))
 
 		return
 	}
 
-	U.ReturnJson(res, ctx)
+	utils.ReturnJson(res, ctx)
 }

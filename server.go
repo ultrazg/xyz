@@ -1,42 +1,45 @@
-package server
+package main
 
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	U "github.com/ultrazg/xyz/pkg/utils"
-	"github.com/ultrazg/xyz/routes"
+	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 )
 
-func Start() {
-	p, d := U.InitFlag()
+func Start() (err error) {
+	p, d := utils.InitFlag()
 	port := fmt.Sprintf("%d", p)
 
-	U.P(port)
+	utils.P(port)
 
 	gin.SetMode(gin.ReleaseMode)
 	engine := gin.New()
 
 	engine.Use(Cors())
 
-	routes.RegisterRouters(engine)
+	RegisterRouters(engine)
 
 	log.Printf("server start on %s", port)
 
 	if d {
-		err := U.OpenBrowser("http://localhost:" + port + "/doc")
+		err := utils.OpenBrowser("http://localhost:" + port + "/docs")
 		if err != nil {
 			log.Println("open browser fail")
+
+			return fmt.Errorf("open browser fail")
 		}
 	}
 
-	err := engine.Run(":" + port)
+	err = engine.Run(":" + port)
 	if err != nil {
 		log.Println("server start fail")
 
-		return
+		return fmt.Errorf("server start fail")
 	}
+
+	return nil
 }
 
 func Cors() gin.HandlerFunc {

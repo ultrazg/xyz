@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	C "github.com/ultrazg/xyz/constant"
-	U "github.com/ultrazg/xyz/pkg/utils"
+	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
@@ -26,7 +26,7 @@ var Search = func(ctx *gin.Context) {
 
 	err := ctx.ShouldBind(&params)
 	if err != nil {
-		U.ReturnBadRequest(ctx, err)
+		utils.ReturnBadRequest(ctx, err)
 
 		return
 	}
@@ -35,7 +35,7 @@ var Search = func(ctx *gin.Context) {
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
 	if params.Keyword == "" || params.Type == "" {
-		U.ReturnBadRequest(ctx, nil)
+		utils.ReturnBadRequest(ctx, nil)
 
 		return
 	}
@@ -82,20 +82,20 @@ var Search = func(ctx *gin.Context) {
 		"Timezone":                    "Asia/Shanghai",
 	}
 
-	res, code, err := U.Request(url, http.MethodPost, p, headers)
+	res, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
-			"msg":  U.GetMsg(code),
+			"msg":  utils.GetMsg(code),
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/search/create", code, U.GetMsg(code))
+		log.Println("/v1/search/create", code, utils.GetMsg(code))
 
 		return
 	}
 
-	U.ReturnJson(res, ctx)
+	utils.ReturnJson(res, ctx)
 }
 
 // SearchPreset 可能想搜的内容
@@ -127,18 +127,18 @@ var SearchPreset = func(ctx *gin.Context) {
 		"Timezone":                    "Asia/Shanghai",
 	}
 
-	res, code, err := U.Request(url, http.MethodGet, nil, headers)
+	res, code, err := utils.Request(url, http.MethodGet, nil, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
-			"msg":  U.GetMsg(code),
+			"msg":  utils.GetMsg(code),
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/search/get-preset", code, U.GetMsg(code))
+		log.Println("/v1/search/get-preset", code, utils.GetMsg(code))
 
 		return
 	}
 
-	U.ReturnJson(res, ctx)
+	utils.ReturnJson(res, ctx)
 }

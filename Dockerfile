@@ -8,6 +8,6 @@ RUN go mod download && go mod verify
 
 COPY . .
 
-RUN go build -o xyz ./cmd
+RUN go build -o xyz .
 
 CMD ["./xyz"]

@@ -3,7 +3,7 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/pkg/utils"
+	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
@@ -13,7 +13,7 @@ type StickerListRequestBody struct {
 	Uid string `json:"uid" form:"uid"`
 }
 
-// StickerList 我的贴纸
+// StickerList 根据 uid 查询已获得的贴纸
 var StickerList = func(ctx *gin.Context) {
 	var params StickerListRequestBody
 
@@ -83,7 +83,7 @@ type StickerBoardRequestBody struct {
 	Uid string `json:"uid" form:"uid"`
 }
 
-// StickerBoard 我的贴纸墙
+// StickerBoard 根据 uid 查询贴纸墙
 var StickerBoard = func(ctx *gin.Context) {
 	var params StickerBoardRequestBody
 
