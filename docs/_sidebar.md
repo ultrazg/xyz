@@ -37,3 +37,5 @@
 * [未读消息](/unreadCount)
 * [用户统计数据](/userStats)
 * [查询用户信息](/getProfile)
+* [查询收听数据概览](/mileage)
+* [查询收听排行](/mileageList)
