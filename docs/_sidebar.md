@@ -39,3 +39,4 @@
 * [查询用户信息](/getProfile)
 * [查询收听数据概览](/mileage)
 * [查询收听排行](/mileageList)
+* [查询收听历史](/playedList)

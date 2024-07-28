@@ -56,4 +56,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/get_profile", utils.CheckAccessToken(), handlers.GetProfileByUid)                          // 根据 uid 查询用户信息
 	engine.POST("/mileage_get", utils.CheckAccessToken(), handlers.GetMileage)                               // 获取收听数据概览
 	engine.POST("/mileage_list", utils.CheckAccessToken(), handlers.GetMileageList)                          // 获取收听排行
+	engine.POST("/played_list", utils.CheckAccessToken(), handlers.PlayedList)                               // 获取收听历史记录
 }
