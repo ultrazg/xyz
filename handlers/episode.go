@@ -314,6 +314,9 @@ var PlayedList = func(ctx *gin.Context) {
 		return
 	}
 
+	p := map[string]any{
+		"uid": params.Uid,
+	}
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 	now := time.Now()
@@ -342,7 +345,7 @@ var PlayedList = func(ctx *gin.Context) {
 		"Timezone":                    "Asia/Shanghai",
 	}
 
-	response, code, err := utils.Request(url, http.MethodPost, nil, headers)
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
 		ctx.JSON(code, gin.H{
 			"code": code,
