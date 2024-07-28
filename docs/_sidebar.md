@@ -42,3 +42,4 @@
 * [查询收听历史](/playedList)
 * [查询「用户的喜欢」（片段）](/pickRecent)
 * [查询「用户的喜欢」（全部）](/pickHistory)
+* [查询用户创建的节目](/ownedPodcasts)
