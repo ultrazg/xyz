@@ -9,17 +9,45 @@ import (
 	"time"
 )
 
+type SubscriptionBody struct {
+	Uid         string                   `form:"uid"`
+	LoadMoreKey *SubscriptionLoadMoreKey `form:"loadMoreKey"`
+}
+
+type SubscriptionLoadMoreKey struct {
+	SubscribedAt string `form:"subscribedAt"`
+	Id           string `form:"id"`
+}
+
 // Subscription 我的订阅
 var Subscription = func(ctx *gin.Context) {
+	var params *SubscriptionBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	p := map[string]any{
+		"limit":     "20",
+		"sortOrder": "desc",
+		"sortBy":    "subscribedAt",
+	}
+
+	if params.Uid != "" {
+		p["uid"] = params.Uid
+	}
+
+	if params.LoadMoreKey != nil {
+		p["loadMoreKey"] = params.LoadMoreKey
+	}
+
 	h := ctx.Request.Header
 	XjikeAccessToken := h.Get("x-jike-access-token")
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
-	p := map[string]any{
-		"limit":     "20", // TODO: limit不写死，可以根据 uid 查询订阅
-		"sortOrder": "desc",
-		"sortBy":    "subscribedAt",
-	}
 	url := C.BaseUrl + "/v1/subscription/list"
 	headers := map[string]string{
 		"Host":                        "api.xiaoyuzhoufm.com",
