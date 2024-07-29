@@ -39,6 +39,7 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/comment_collect_create", utils.CheckAccessToken(), handlers.CreateCommentCollect)          // 收藏评论
 	engine.POST("/comment_collect_remove", utils.CheckAccessToken(), handlers.RemoveCommentCollect)          // 取消收藏评论
 	engine.POST("/comment_collect_list", utils.CheckAccessToken(), handlers.CommentCollectList)              // 获取收藏评论列表
+	engine.POST("/comment_like_update", utils.CheckAccessToken(), handlers.CommentLikeUpdate)                // 点赞/取消点赞评论
 	engine.POST("/discovery", utils.CheckAccessToken(), handlers.Discovery)                                  // 首页榜单、精选节目、推荐等
 	engine.POST("/refresh_episode_recommend", utils.CheckAccessToken(), handlers.RefreshEpisodeRecommend)    // 首页大家都在听-刷新推荐
 	engine.POST("/episode_live_count", utils.CheckAccessToken(), handlers.Live)                              // 正在收听的人数

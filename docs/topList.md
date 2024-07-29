@@ -47,7 +47,7 @@
 
 ```javascript
 {
-  "cateory": "HOT",
+  "category": "HOT",
 }
 ```
 

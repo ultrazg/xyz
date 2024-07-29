@@ -355,3 +355,80 @@ var CommentCollectList = func(ctx *gin.Context) {
 
 	utils.ReturnJson(response, ctx)
 }
+
+type CommentLikeUpdateBody struct {
+	Liked bool   `form:"liked"`
+	Id    string `form:"id"`
+}
+
+// CommentLikeUpdate 点赞/取消点赞评论
+var CommentLikeUpdate = func(ctx *gin.Context) {
+	var params *CommentLikeUpdateBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	if params.Id == "" {
+		utils.ReturnBadRequest(ctx, nil)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+	p := map[string]any{
+		"liked": params.Liked,
+		"target": map[string]string{
+			"id":   params.Id,
+			"type": "COMMENT",
+		},
+		"sourcePageName":  15,
+		"currentPageName": 20,
+	}
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/like/update"
+	headers := map[string]string{
+		"Host":                        "api.xiaoyuzhoufm.com",
+		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
+		"Market":                      "AppStore",
+		"App-BuildNo":                 "1576",
+		"OS":                          "ios",
+		"x-jike-access-token":         XJikeAccessToken,
+		"Manufacturer":                "Apple",
+		"BundleID":                    "app.podcast.cosmos",
+		"Connection":                  "keep-alive",
+		"abtest-info":                 "{\"old_user_discovery_feed\":\"enable\"}",
+		"Accept-Language":             "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
+		"X-Online-Host":               "api.xiaoyuzhoufm.com",
+		"Model":                       "iPhone14,2",
+		"app-permissions":             "4",
+		"Accept":                      "*/*",
+		"Content-Type":                "application/json",
+		"App-Version":                 "2.57.1",
+		"WifiConnected":               "true",
+		"OS-Version":                  "17.4.1",
+		"x-custom-xiaoyuzhou-app-dev": "",
+		"Local-Time":                  isoTime,
+		"Timezone":                    "Asia/Shanghai",
+	}
+
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/like/update", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}
