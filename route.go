@@ -61,4 +61,6 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/pick_list_history", utils.CheckAccessToken(), handlers.PickListHistory)                    // 获取「用户的喜欢」全部内容
 	engine.POST("/owned_podcasts", utils.CheckAccessToken(), handlers.OwnedPodcastsList)                     // 获取用户创建的播客
 	engine.POST("/top_list", utils.CheckAccessToken(), handlers.GetTopList)                                  // 获取榜单
+	engine.POST("/following_list", utils.CheckAccessToken(), handlers.FollowingList)                         // 获取「我」关注的人
+	engine.POST("/follower_list", utils.CheckAccessToken(), handlers.FollowerList)                           // 获取关注「我」的人
 }

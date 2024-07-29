@@ -44,3 +44,5 @@
 * [查询「用户的喜欢」（全部）](/pickHistory)
 * [查询用户创建的节目](/ownedPodcasts)
 * [查询榜单](/topList)
+* [查询关注「我」的人](/follower)
+* [查询「我」关注的人](/following)
