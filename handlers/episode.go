@@ -343,6 +343,8 @@ var PlayedList = func(ctx *gin.Context) {
 		"x-custom-xiaoyuzhou-app-dev": "",
 		"Local-Time":                  isoTime,
 		"Timezone":                    "Asia/Shanghai",
+		"X-Online-Host":               "api.xiaoyuzhoufm.com",
+		"Content-Type":                "application/json",
 	}
 
 	response, code, err := utils.Request(url, http.MethodPost, p, headers)
