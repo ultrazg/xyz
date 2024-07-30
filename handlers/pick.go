@@ -10,7 +10,8 @@ import (
 )
 
 type PickBody struct {
-	Uid string `form:"uid"`
+	Uid         string `form:"uid"`
+	LoadMoreKey string `form:"loadMoreKey"`
 }
 
 // PickListRecent 个人主页「用户的喜欢」部分展示片段
@@ -98,6 +99,11 @@ var PickListHistory = func(ctx *gin.Context) {
 	p := map[string]any{
 		"uid": params.Uid,
 	}
+
+	if params.LoadMoreKey != "" {
+		p["loadMoreKey"] = params.LoadMoreKey
+	}
+
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 	now := time.Now()
