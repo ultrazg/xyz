@@ -23,35 +23,37 @@ func Request(url, method string, body map[string]any, headers map[string]string)
 		return nil, 0, fmt.Errorf("failed to create request: %v", err)
 	}
 
-	// 请求头
-	for key, value := range headers {
-		req.Header.Set(key, value)
-	}
-
-	fmt.Println("=========[REQUEST INFO]=========")
-	fmt.Println("Request Url:", url)
-	fmt.Println("Request Method:", method)
-
-	if req.Body != nil {
-		requestBody := req.Body
-		var requestBodyBytes []byte
-		if requestBody != nil {
-			requestBodyBytes, _ = io.ReadAll(requestBody)
+	if headers != nil {
+		// 请求头
+		for key, value := range headers {
+			req.Header.Set(key, value)
 		}
 
-		fmt.Println("Request Body:", string(requestBodyBytes))
+		fmt.Println("=========[REQUEST INFO]=========")
+		fmt.Println("Request Url:", url)
+		fmt.Println("Request Method:", method)
 
-		req.Body = io.NopCloser(bytes.NewBuffer(requestBodyBytes))
-	}
+		if req.Body != nil {
+			requestBody := req.Body
+			var requestBodyBytes []byte
+			if requestBody != nil {
+				requestBodyBytes, _ = io.ReadAll(requestBody)
+			}
 
-	fmt.Println("Request Headers:")
-	for key, values := range req.Header {
-		for _, value := range values {
-			fmt.Printf("%s: %s\n", key, value)
+			fmt.Println("Request Body:", string(requestBodyBytes))
+
+			req.Body = io.NopCloser(bytes.NewBuffer(requestBodyBytes))
 		}
-	}
 
-	fmt.Println("========================")
+		fmt.Println("Request Headers:")
+		for key, values := range req.Header {
+			for _, value := range values {
+				fmt.Printf("%s: %s\n", key, value)
+			}
+		}
+
+		fmt.Println("========================")
+	}
 
 	var resp *http.Response
 	var retryErr error

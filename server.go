@@ -14,6 +14,13 @@ func Start() (err error) {
 
 	utils.P(port)
 
+	go func() {
+		err := utils.CheckUpgrade()
+		if err != nil {
+			return
+		}
+	}()
+
 	gin.SetMode(gin.ReleaseMode)
 	engine := gin.New()
 
