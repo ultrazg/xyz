@@ -1,7 +1,9 @@
 package main
 
+import "github.com/ultrazg/xyz/service"
+
 func main() {
-	err := Start()
+	err := service.Start()
 	if err != nil {
 		panic(err)
 	}

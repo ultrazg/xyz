@@ -1,19 +1,16 @@
-package main
+package router
 
 import (
-	"embed"
 	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/doc"
 	"github.com/ultrazg/xyz/handlers"
 	"github.com/ultrazg/xyz/utils"
 	"net/http"
 )
 
-//go:embed docs/*
-var fs embed.FS
-
 func RegisterRouters(engine *gin.Engine) {
 	engine.GET("/docs/*filepath", func(context *gin.Context) {
-		server := http.FileServer(http.FS(fs))
+		server := http.FileServer(http.FS(docs.Fs))
 		server.ServeHTTP(context.Writer, context.Request)
 	})
 	engine.GET("/ping", handlers.Pong)

@@ -4,7 +4,9 @@ WORKDIR /app
 
 COPY go.mod go.sum ./
 
-RUN go mod download && go mod verify
+RUN go clean -modcache && \
+    go mod download -x && \
+    go mod verify
 
 COPY . .
 

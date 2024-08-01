@@ -1,14 +1,15 @@
-package main
+package service
 
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/router"
 	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 )
 
-func Start() (err error) {
+func Start() error {
 	p, d := utils.InitFlag()
 	port := fmt.Sprintf("%d", p)
 
@@ -26,7 +27,7 @@ func Start() (err error) {
 
 	engine.Use(Cors())
 
-	RegisterRouters(engine)
+	router.RegisterRouters(engine)
 
 	log.Printf("server start on %s", port)
 
@@ -39,7 +40,7 @@ func Start() (err error) {
 		}
 	}
 
-	err = engine.Run(":" + port)
+	err := engine.Run(":" + port)
 	if err != nil {
 		log.Println("server start fail")
 
