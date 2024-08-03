@@ -46,6 +46,31 @@ $ go run . -d
 
 
 
+## 作为模块
+
+```shell
+go get github.com/ultrazg/xyz
+```
+
+```go
+package main
+
+import (
+				"fmt"
+  			"github.com/ultrazg/xyz/service"
+)
+
+func main() {
+	err := service.Start()
+	if err != nil {
+    fmt.Println("fail")
+	}
+}
+```
+
+
+
+
 ## 构建
 
 项目内提供对应平台的 `build.sh` 文件，按需执行即可
