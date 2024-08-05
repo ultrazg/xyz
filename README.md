@@ -56,14 +56,15 @@ go get github.com/ultrazg/xyz
 package main
 
 import (
-				"fmt"
-  			"github.com/ultrazg/xyz/service"
+	"fmt"
+
+	"github.com/ultrazg/xyz/service"
 )
 
 func main() {
 	err := service.Start()
 	if err != nil {
-    fmt.Println("fail")
+		fmt.Println("fail")
 	}
 }
 ```
