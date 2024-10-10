@@ -65,4 +65,6 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/blocked_user_lists", utils.CheckAccessToken(), handlers.BlockedUserLists)                  // 查询黑名单列表
 	engine.POST("/blocked_user_create", utils.CheckAccessToken(), handlers.BlockedUserCreate)                // 将用户加入黑名单
 	engine.POST("/blocked_user_remove", utils.CheckAccessToken(), handlers.BlockedUserRemove)                // 将用户移出黑名单
+	engine.POST("/user_preference_get", utils.CheckAccessToken(), handlers.UserPreferenceGet)                // 获取用户偏好设置
+	engine.POST("/user_preference_update", utils.CheckAccessToken(), handlers.UserPreferenceUpdate)          // 更新用户偏好设置
 }

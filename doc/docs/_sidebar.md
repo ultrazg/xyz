@@ -50,3 +50,5 @@
 - [查询黑名单列表](/blockedUserLists)
 - [将用户加入黑名单](/blockedUserCreate)
 - [将用户移出黑名单](/blockedUserRemove)
+- [获取用户偏好设置](/preferenceGet)
+- [更新用户偏好设置](/preferenceUpdate)
