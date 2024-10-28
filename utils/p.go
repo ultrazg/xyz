@@ -15,6 +15,6 @@ func P(p string) {
 #+#    #+#    #+#     #+#      
 ###    ###    ###    ######### `
 
-	fmt.Println(appLogo + "v" + C.Version + " built with " + runtime.Version() + "\n")
+	fmt.Println("\033[H\033[2J" + appLogo + "v" + C.Version + " built with " + runtime.Version() + "\n")
 	fmt.Println("API 文档：http://localhost:" + p + "/docs")
 }
