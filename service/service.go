@@ -2,11 +2,12 @@ package service
 
 import (
 	"fmt"
+	"log"
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/ultrazg/xyz/router"
 	"github.com/ultrazg/xyz/utils"
-	"log"
-	"net/http"
 )
 
 func Start() error {
@@ -55,7 +56,7 @@ func Cors() gin.HandlerFunc {
 		method := context.Request.Method
 
 		context.Header("Access-Control-Allow-Origin", "*")
-		context.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token, x-token")
+		context.Header("Access-Control-Allow-Headers", "Content-Type, AccessToken, X-CSRF-Token, Authorization, Token, x-token, x-jike-access-token, x-jike-refresh-token")
 		context.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PATCH, PUT")
 		context.Header("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type")
 		context.Header("Access-Control-Allow-Credentials", "true")
