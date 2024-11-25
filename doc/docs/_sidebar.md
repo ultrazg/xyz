@@ -17,6 +17,7 @@
 - [查询已获得的贴纸](/sticker)
 - [查询贴纸墙](/stickerBoard)
 - [查询单集播放进度](/episodePlayProgress)
+- [更新单集播放进度](/updateEpisodePlayProgress)
 - [查询单集的评论](/commentPrimary)
 - [查询回复评论](/commentThread)
 - [收藏评论](/commentCollectCreate)

@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/constant"
+	"github.com/ultrazg/xyz/utils"
 )
 
 type EpisodeListRequestBody struct {
@@ -224,6 +225,88 @@ var PlaybackProgress = func(ctx *gin.Context) {
 		})
 
 		log.Println("/v1/playback-progress/list", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}
+
+type UpdatePlaybackProgressRequestBody struct {
+	Data []struct {
+		Pid      string `json:"pid" form:"pid"`
+		Eid      string `json:"eid" form:"eid"`
+		Progress int    `json:"progress" form:"progress"`
+		PlayedAt string `json:"playedAt" form:"playedAt"`
+	} `json:"data" form:"data"`
+}
+
+// UpdatePlaybackProgress 更新单集播放进度
+var UpdatePlaybackProgress = func(ctx *gin.Context) {
+	var params UpdatePlaybackProgressRequestBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+
+	if len(params.Data) == 0 {
+		utils.ReturnBadRequest(ctx, nil)
+		return
+	}
+
+	for _, data := range params.Data {
+		if data.Pid == "" || data.Eid == "" || data.Progress < 0 || data.PlayedAt == "" {
+			utils.ReturnBadRequest(ctx, nil)
+			return
+		}
+	}
+
+	p := map[string]any{
+		"data": params.Data,
+	}
+
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/playback-progress/update"
+	headers := map[string]string{
+		"Host":                        "api.xiaoyuzhoufm.com",
+		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
+		"Market":                      "AppStore",
+		"App-BuildNo":                 "1576",
+		"OS":                          "ios",
+		"x-jike-access-token":         XJikeAccessToken,
+		"Manufacturer":                "Apple",
+		"BundleID":                    "app.podcast.cosmos",
+		"Connection":                  "keep-alive",
+		"abtest-info":                 "{\"old_user_discovery_feed\":\"enable\"}",
+		"Accept-Language":             "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
+		"Model":                       "iPhone14,2",
+		"app-permissions":             "4",
+		"Accept":                      "*/*",
+		"Content-Type":                "application/json",
+		"App-Version":                 "2.57.1",
+		"WifiConnected":               "true",
+		"OS-Version":                  "17.4.1",
+		"x-custom-xiaoyuzhou-app-dev": "",
+		"Local-Time":                  isoTime,
+		"Timezone":                    "Asia/Shanghai",
+	}
+
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/playback-progress/update", code, utils.GetMsg(code))
 
 		return
 	}
