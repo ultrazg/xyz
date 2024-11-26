@@ -12,6 +12,12 @@ import (
 
 func Start() error {
 	p, d := utils.InitFlag()
+
+	err := utils.CheckPort(p)
+	if err != nil {
+		return err
+	}
+
 	port := fmt.Sprintf("%d", p)
 
 	utils.P(port)
@@ -41,7 +47,7 @@ func Start() error {
 		}
 	}
 
-	err := engine.Run(":" + port)
+	err = engine.Run(":" + port)
 	if err != nil {
 		log.Println("server start fail")
 
