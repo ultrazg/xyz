@@ -32,6 +32,7 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/sticker", utils.CheckAccessToken(), handlers.StickerList)                                  // 根据 uid 查询已获得的贴纸
 	engine.POST("/sticker_board", utils.CheckAccessToken(), handlers.StickerBoard)                           // 查询我的贴纸墙
 	engine.POST("/episode_play_progress", utils.CheckAccessToken(), handlers.PlaybackProgress)               // 查询单集播放进度
+	engine.POST("/episode_play_progress_update", utils.CheckAccessToken(), handlers.UpdatePlaybackProgress)  // 更新单集播放进度
 	engine.POST("/comment_primary", utils.CheckAccessToken(), handlers.CommentPrimary)                       // 查询单集的评论
 	engine.POST("/comment_thread", utils.CheckAccessToken(), handlers.CommentThread)                         // 查询回复评论
 	engine.POST("/comment_collect_create", utils.CheckAccessToken(), handlers.CreateCommentCollect)          // 收藏评论
