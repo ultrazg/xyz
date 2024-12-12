@@ -53,3 +53,4 @@
 - [将用户移出黑名单](/blockedUserRemove)
 - [获取用户偏好设置](/preferenceGet)
 - [更新用户偏好设置](/preferenceUpdate)
+- [关注/取关用户](/relation)

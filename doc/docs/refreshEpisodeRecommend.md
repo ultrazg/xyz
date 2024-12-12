@@ -4,7 +4,7 @@
 
 #### 请求地址
 
-> /refresh_episode_commend
+> /refresh_episode_recommend
 
 #### 请求方式
 
