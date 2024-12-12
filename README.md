@@ -4,13 +4,9 @@
 </h1>
 <h4 align="center">小宇宙FM API</h4>
 
-
 ## 环境
 
 Go 1.22.0 <img alt="Static Badge" src="https://img.shields.io/badge/Go-1.22.0-blue.svg">
-
-
-
 
 ## 安装
 
@@ -19,8 +15,6 @@ $ git clone git@github.com:ultrazg/xyz.git
 $ cd xyz
 $ go mod tidy
 ```
-
-
 
 ## 运行
 
@@ -43,8 +37,6 @@ $ go run . -d
 > 接口地址：http://localhost:{{port}}/login
 >
 > 文档地址：http://localhost:{{port}}/docs
-
-
 
 ## 作为模块
 
@@ -69,20 +61,15 @@ func main() {
 }
 ```
 
-
-
-
 ## 构建
 
 项目内提供对应平台的 `build.sh` 文件，按需执行即可
-
-
 
 ## 功能（更新中）
 
 - [x] 发送验证码
 - [x] 短信登录
-- [x] 刷新token
+- [x] 刷新 token
 - [x] 搜索
 - [x] 「你可能想搜的内容」
 - [x] 获取我的信息
@@ -122,8 +109,7 @@ func main() {
 - [x] 拉黑/取消拉黑用户
 - [x] 获取用户偏好设置
 - [x] 更新用户偏好设置
-
-
+- [x] 关注/取关用户
 
 ## License
 
