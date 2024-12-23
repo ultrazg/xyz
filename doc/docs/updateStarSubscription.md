@@ -4,7 +4,7 @@
 
 #### 请求地址
 
-> /subscription_update
+> /subscription_star_update
 
 #### 请求方式
 
@@ -40,12 +40,14 @@
 | description | string | 描述                                             |
 | media       | object | 播客音频信息（大小、链接等）                     |
 | podcasters  | array  | 播客嘉宾的信息（头像、昵称和uid等）              |
+| subscriptionStatus | string  | 订阅状态。**ON** 为**已订阅**，**OFF** 为**未订阅** |
+| subscriptionStar   | boolean | 是否为星标订阅                                      |
 | ...         | ...    | ...                                              |
 
 
 #### 示例
 
-> 地址：https://www.example.com/subscription_update
+> 地址：https://www.example.com/subscription_star_update
 
 参数
 
@@ -76,21 +78,7 @@
           note: "订阅公众号",
           type: "wechatOfficialAccounts",
         },
-        {
-          name: "不开玩笑JokesAside",
-          type: "weibo",
-          url: "https://weibo.com/n/不开玩笑JokesAside",
-        },
-        {
-          name: "JokesAside2024",
-          note: "加听友群",
-          type: "wechat",
-        },
-        {
-          name: "liulu@jieyanwenhua.com",
-          note: "商务合作",
-          type: "email",
-        },
+        // ...
       ],
       description:
         "一个时而开玩笑，时而不开玩笑的播客节目，由猫头鹰喜剧出品...",
@@ -98,15 +86,15 @@
       hasPopularEpisodes: true,
       image: {
         largePicUrl:
-          "https://bts-image.xyzcdn.net/aHR0cHM6Ly9pbWFnZS54eXpjZG4ubmV0L0ZvYjZKc3BveHl4MEg4VzJzZEtlUTdFNHU5M3oucG5n.png@large",
+          "https://bts-image.xyzcdn.net/...",
         middlePicUrl:
-          "https://bts-image.xyzcdn.net/aHR0cHM6Ly9pbWFnZS54eXpjZG4ubmV0L0ZvYjZKc3BveHl4MEg4VzJzZEtlUTdFNHU5M3oucG5n.png@middle",
+          "https://bts-image.xyzcdn.net/...",
         picUrl:
-          "https://bts-image.xyzcdn.net/aHR0cHM6Ly9pbWFnZS54eXpjZG4ubmV0L0ZvYjZKc3BveHl4MEg4VzJzZEtlUTdFNHU5M3oucG5n.png",
+          "https://bts-image.xyzcdn.net/...",
         smallPicUrl:
-          "https://bts-image.xyzcdn.net/aHR0cHM6Ly9pbWFnZS54eXpjZG4ubmV0L0ZvYjZKc3BveHl4MEg4VzJzZEtlUTdFNHU5M3oucG5n.png@small",
+          "https://bts-image.xyzcdn.net/...",
         thumbnailUrl:
-          "https://bts-image.xyzcdn.net/aHR0cHM6Ly9pbWFnZS54eXpjZG4ubmV0L0ZvYjZKc3BveHl4MEg4VzJzZEtlUTdFNHU5M3oucG5n.png@thumbnail",
+          "https://bts-image.xyzcdn.net/...",
       },
       isCustomized: false,
       latestEpisodePubDate: "2024-05-31T16:00:00.000Z",
@@ -126,15 +114,15 @@
               format: "jpeg",
               height: 3000,
               largePicUrl:
-                "https://image.xyzcdn.net/FnQ-E7VcqLbzqplvdVPGrQRGHmxC.jpg@large",
+                "https://image.xyzcdn.net/...",
               middlePicUrl:
-                "https://image.xyzcdn.net/FnQ-E7VcqLbzqplvdVPGrQRGHmxC.jpg@middle",
+                "https://image.xyzcdn.net/...",
               picUrl:
-                "https://image.xyzcdn.net/FnQ-E7VcqLbzqplvdVPGrQRGHmxC.jpg",
+                "https://image.xyzcdn.net/...",
               smallPicUrl:
-                "https://image.xyzcdn.net/FnQ-E7VcqLbzqplvdVPGrQRGHmxC.jpg@small",
+                "https://image.xyzcdn.net/...",
               thumbnailUrl:
-                "https://image.xyzcdn.net/FnQ-E7VcqLbzqplvdVPGrQRGHmxC.jpg@thumbnail",
+                "https://image.xyzcdn.net/...",
               width: 3000,
             },
           },
