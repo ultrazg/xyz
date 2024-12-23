@@ -18,9 +18,10 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/sendCode", handlers.SendCode)                                                              // 发送验证码
 	engine.POST("/login", handlers.Login)                                                                    // 验证码登录
 	engine.POST("/subscription", utils.CheckAccessToken(), handlers.Subscription)                            // 订阅列表
+	engine.POST("/subscription_update", utils.CheckAccessToken(), handlers.SubscriptionUpdate)               // 更新订阅
 	engine.POST("/subscription_star", utils.CheckAccessToken(), handlers.StarSubscription)                   // 星标订阅
 	engine.POST("/subscription_non_starred", utils.CheckAccessToken(), handlers.NonStarredSubscription)      // 未加星标订阅
-	engine.POST("/subscription_update", utils.CheckAccessToken(), handlers.UpdateStarSubscription)           // 更新星标订阅
+	engine.POST("/subscription_star_update", utils.CheckAccessToken(), handlers.UpdateStarSubscription)      // 更新星标订阅
 	engine.POST("/search", utils.CheckAccessToken(), handlers.Search)                                        // 搜索
 	engine.POST("/search_preset", utils.CheckAccessToken(), handlers.SearchPreset)                           // 「你可能想搜的内容」
 	engine.POST("/refresh_token", handlers.RefreshToken)                                                     // 刷新 token

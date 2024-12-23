@@ -6,6 +6,7 @@
 - [搜索](/search)
 - [「你可能想搜的内容」](/searchPreset)
 - [我的订阅](/subscription)
+- [更新订阅](/subscriptionUpdate)
 - [星标订阅](/starSubscription)
 - [未加星标订阅](/nonStarredSubscription)
 - [更新星标订阅](/updateStarSubscription)
