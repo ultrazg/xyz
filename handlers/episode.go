@@ -12,6 +12,7 @@ import (
 
 type EpisodeListRequestBody struct {
 	Pid         string              `json:"pid" form:"pid"`
+	Order       string              `json:"order" form:"order"`
 	LoadMoreKey *episodeLoadMoreKey `json:"loadMoreKey" form:"loadMoreKey"`
 }
 
@@ -35,7 +36,7 @@ var EpisodeList = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if params.Pid == "" {
+	if params.Pid == "" || (params.Order != "desc" && params.Order != "asc") {
 		utils.ReturnBadRequest(ctx, nil)
 
 		return
@@ -44,6 +45,7 @@ var EpisodeList = func(ctx *gin.Context) {
 	p := map[string]any{
 		"limit": "20",
 		"pid":   params.Pid,
+		"order": params.Order,
 	}
 
 	if params.LoadMoreKey != nil {
