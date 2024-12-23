@@ -4,6 +4,9 @@
 </h1>
 <h4 align="center">小宇宙FM API</h4>
 
+## 免责声明
+**⚠️ 本项目仅供学习、研究使用，请遵守国家法律，严禁用于任何非法用途**
+
 ## 环境
 
 Go 1.22.0 <img alt="Static Badge" src="https://img.shields.io/badge/Go-1.22.0-blue.svg">
