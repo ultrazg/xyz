@@ -278,3 +278,69 @@ var PodcastGetInfo = func(ctx *gin.Context) {
 
 	utils.ReturnJson(response, ctx)
 }
+
+type PodcastHonorListBody struct {
+	Pid string `form:"pid"`
+}
+
+// PodcastHonorList 获取节目荣誉墙
+var PodcastHonorList = func(ctx *gin.Context) {
+	var params *PodcastHonorListBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	if params.Pid == "" {
+		utils.ReturnBadRequest(ctx, nil)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+	p := map[string]any{
+		"pid": params.Pid,
+	}
+	url := constant.BaseUrl + "/v1/podcast-honor/list"
+	headers := map[string]string{
+		"Host":                "api.xiaoyuzhoufm.com",
+		"User-Agent":          "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1) xyzTheme/defaultLight",
+		"Referer":             "https://h5.xiaoyuzhoufm.com/",
+		"Origin":              "https://h5.xiaoyuzhoufm.com/",
+		"Market":              "AppStore",
+		"App-BuildNo":         "1576",
+		"Sec-Fetch-Dest":      "empty",
+		"Sec-Fetch-Mode":      "cors",
+		"OS":                  "ios",
+		"x-jike-access-token": XJikeAccessToken,
+		"Sec-Fetch-Site":      "same-site",
+		"Manufacturer":        "Apple",
+		"BundleID":            "app.podcast.cosmos",
+		"Connection":          "keep-alive",
+		"Accept-Language":     "zh-CN,zh-Hans;q=0.9",
+		"Model":               "iPhone14,2",
+		"Accept":              "application/json, text/plain, */*",
+		"App-Version":         "2.57.1",
+		"OS-Version":          "17.4.1",
+		"Content-type":        "application/json",
+	}
+
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/podcast-honor/list", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}
