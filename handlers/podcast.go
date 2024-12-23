@@ -344,3 +344,69 @@ var PodcastHonorList = func(ctx *gin.Context) {
 
 	utils.ReturnJson(response, ctx)
 }
+
+type PodcastBulletinRequestBody struct {
+	Pid string `form:"pid"`
+}
+
+// PodcastBulletin 获取节目公告
+var PodcastBulletin = func(ctx *gin.Context) {
+	var params *PodcastBulletinRequestBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+
+	if params.Pid == "" {
+		utils.ReturnBadRequest(ctx, nil)
+
+		return
+	}
+
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/podcast-bulletin/get-by-pid?pid=" + params.Pid
+	headers := map[string]string{
+		"Host":                        "api.xiaoyuzhoufm.com",
+		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1858; iOS 17.4.1)",
+		"Market":                      "AppStore",
+		"App-BuildNo":                 "1576",
+		"Local-Time":                  isoTime,
+		"OS":                          "ios",
+		"x-jike-access-token":         XJikeAccessToken,
+		"x-custom-xiaoyuzhou-app-dev": "",
+		"Manufacturer":                "Apple",
+		"BundleID":                    "app.podcast.cosmos",
+		"Connection":                  "keep-alive",
+		"abtest-info":                 "{}",
+		"Accept-Language":             "zh-Hans-CN;q=1.0, zh-Hant-TW;q=0.9",
+		"Timezone":                    "Asia/Shanghai",
+		"Model":                       "iPhone14,2",
+		"app-permissions":             "4",
+		"Accept":                      "*/*",
+		"App-Version":                 "2.57.1",
+		"OS-Version":                  "17.4.1",
+		"WifiConnected":               "true",
+	}
+
+	response, code, err := utils.Request(url, http.MethodGet, nil, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/podcast-bulletin/get-by-pid?pid="+params.Pid, code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}

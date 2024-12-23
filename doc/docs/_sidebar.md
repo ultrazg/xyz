@@ -16,6 +16,7 @@
 - [获取节目主体信息](/podcastGetInfo)
 - [获取节目荣誉墙](/podcastHonorList)
 - [相关节目推荐](/podcastRelated)
+- [获取节目公告](/podcastBulletin)
 - [查询用户信息](/profile)
 - [查询已获得的贴纸](/sticker)
 - [查询贴纸墙](/stickerBoard)
