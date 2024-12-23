@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/constant"
+	"github.com/ultrazg/xyz/utils"
 )
 
 type PodcastDetailRequestBody struct {
@@ -208,6 +209,69 @@ var OwnedPodcastsList = func(ctx *gin.Context) {
 		})
 
 		log.Println("/v1/podcaster/owned-podcasts", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}
+
+type PodcastGetInfoBody struct {
+	Pid string `form:"pid"`
+}
+
+// PodcastGetInfo 获取节目主体信息
+var PodcastGetInfo = func(ctx *gin.Context) {
+	var params *PodcastGetInfoBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+
+	if params.Pid == "" {
+		utils.ReturnBadRequest(ctx, nil)
+
+		return
+	}
+
+	url := constant.BaseUrl + "/v1/podcast/get-info?pid=" + params.Pid
+	headers := map[string]string{
+		"Host":                "api.xiaoyuzhoufm.com",
+		"User-Agent":          "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1) xyzTheme/defaultLight",
+		"Referer":             "https://terms.xiaoyuzhoufm.com/",
+		"Market":              "AppStore",
+		"App-BuildNo":         "1576",
+		"OS":                  "ios",
+		"Origin":              "https://terms.xiaoyuzhoufm.com",
+		"Sec-Fetch-Dest":      "empty",
+		"Sec-Fetch-Site":      "same-site",
+		"Sec-Fetch-Mode":      "cors",
+		"x-jike-access-token": XJikeAccessToken,
+		"Manufacturer":        "Apple",
+		"BundleID":            "app.podcast.cosmos",
+		"Connection":          "keep-alive",
+		"Accept-Language":     "zh-CN,zh-Hans;q=0.9",
+		"Model":               "iPhone14,2",
+		"Accept":              "application/json, text/plain, */*",
+		"App-Version":         "2.57.1",
+		"OS-Version":          "17.4.1",
+	}
+
+	response, code, err := utils.Request(url, http.MethodGet, nil, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/podcast/get-info?pid="+params.Pid, code, utils.GetMsg(code))
 
 		return
 	}

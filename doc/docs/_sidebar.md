@@ -12,6 +12,7 @@
 - [查询单集列表](/episodeList)
 - [查询单集详情](/episodeDetail)
 - [查询节目详情](/podcastDetail)
+- [获取节目主体信息](/podcastGetInfo)
 - [相关节目推荐](/podcastRelated)
 - [查询用户信息](/profile)
 - [查询已获得的贴纸](/sticker)
