@@ -1,18 +1,20 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	C "github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	C "github.com/ultrazg/xyz/constant"
+	"github.com/ultrazg/xyz/utils"
 )
 
 type SearchRequestBody struct {
-	Type        string             `json:"type" form:"type"`
-	Keyword     string             `json:"keyword" form:"keyword"`
-	LoadMoreKey *searchLoadMoreKey `json:"loadMoreKey" form:"loadMoreKey"`
+	Pid         string             `form:"pid"`
+	Type        string             `form:"type"`
+	Keyword     string             `form:"keyword"`
+	LoadMoreKey *searchLoadMoreKey `form:"loadMoreKey"`
 }
 
 type searchLoadMoreKey struct {
@@ -22,7 +24,7 @@ type searchLoadMoreKey struct {
 
 // Search 搜索
 var Search = func(ctx *gin.Context) {
-	var params SearchRequestBody
+	var params *SearchRequestBody
 
 	err := ctx.ShouldBind(&params)
 	if err != nil {
@@ -53,6 +55,10 @@ var Search = func(ctx *gin.Context) {
 			"loadMoreKey": params.LoadMoreKey.LoadMoreKey,
 			"searchId":    params.LoadMoreKey.SearchId,
 		}
+	}
+
+	if params.Pid != "" {
+		p["pid"] = params.Pid
 	}
 
 	now := time.Now()
