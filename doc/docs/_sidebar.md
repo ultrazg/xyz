@@ -11,6 +11,7 @@
 - [未加星标订阅](/nonStarredSubscription)
 - [更新星标订阅](/updateStarSubscription)
 - [查询单集列表](/episodeList)
+- [节目内「最受欢迎」单集列表](/episodeListByFilter)
 - [查询单集详情](/episodeDetail)
 - [查询节目详情](/podcastDetail)
 - [获取节目主体信息](/podcastGetInfo)

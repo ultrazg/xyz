@@ -26,6 +26,7 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/search_preset", utils.CheckAccessToken(), handlers.SearchPreset)                           // 「你可能想搜的内容」
 	engine.POST("/refresh_token", handlers.RefreshToken)                                                     // 刷新 token
 	engine.POST("/episode_list", utils.CheckAccessToken(), handlers.EpisodeList)                             // 剧集列表
+	engine.POST("/episode_list_by_filter", utils.CheckAccessToken(), handlers.EpisodeListByFilter)           // 节目内「最受欢迎」单集列表
 	engine.POST("/episode_detail", utils.CheckAccessToken(), handlers.EpisodeDetail)                         // 查询单集详情
 	engine.POST("/podcast_detail", utils.CheckAccessToken(), handlers.PodcastDetail)                         // 查询节目详情
 	engine.POST("/podcast_get_info", utils.CheckAccessToken(), handlers.PodcastGetInfo)                      // 获取节目主体信息
