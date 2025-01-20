@@ -1,3 +1,9 @@
+## v1.8.1
+
+Fixes
+
+- 修复「我的订阅」翻页失效问题（[#13](https://github.com/ultrazg/xyz/issues/13)）
+
 ## v1.8.0
 
 Added
