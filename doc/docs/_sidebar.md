@@ -46,6 +46,7 @@
 - [用户统计数据](/userStats)
 - [查询用户信息](/getProfile)
 - [查询收听数据概览](/mileage)
+- [更新收听数据概览](/mileageUpdate)
 - [查询收听排行](/mileageList)
 - [查询收听历史](/playedList)
 - [查询「用户的喜欢」（片段）](/pickRecent)
