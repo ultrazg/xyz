@@ -31,6 +31,7 @@
 - [点赞/取消点赞评论](/commentLikeUpdate)
 - [首页榜单、精选节目、推荐等](/discovery)
 - [首页-刷新「大家都在听」推荐](/refreshEpisodeRecommend)
+- [上报播放状态](/liveStatsReport)
 - [正在收听的人数](/episodeLiveCount)
 - [精彩时间点](/episodeClap)
 - [标记精彩时间点](/episodeClapCreate)
