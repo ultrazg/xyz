@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/constant"
+	"github.com/ultrazg/xyz/utils"
 )
 
 type InboxListRequestBody struct {
@@ -57,7 +58,7 @@ var InboxList = func(ctx *gin.Context) {
 		"Manufacturer":                "Apple",
 		"BundleID":                    "app.podcast.cosmos",
 		"Connection":                  "keep-alive",
-		"Accept-Language":             "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
+		"Accept-Language":             "zh-Hans-CN;q=1.0, zh-Hant-TW;q=0.9",
 		"Model":                       "iPhone14,2",
 		"app-permissions":             "4",
 		"Accept":                      "*/*",
@@ -68,6 +69,8 @@ var InboxList = func(ctx *gin.Context) {
 		"x-custom-xiaoyuzhou-app-dev": "",
 		"Local-Time":                  isoTime,
 		"Timezone":                    "Asia/Shanghai",
+		"x-jike-device-id":            "",
+		"x-jike-device-properties":    "",
 	}
 
 	response, code, err := utils.Request(url, http.MethodPost, p, headers)
