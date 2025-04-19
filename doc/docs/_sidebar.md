@@ -42,6 +42,7 @@
 - [更新收藏单集](/updateEpisodeFavorite)
 - [查询收藏单集列表](/episodeFavoriteList)
 - [收听历史](/episodePlayedHistoryList)
+- [更新收听历史](/episodePlayedHistoryListUpdate)
 - [未读消息](/unreadCount)
 - [用户统计数据](/userStats)
 - [查询用户信息](/getProfile)
