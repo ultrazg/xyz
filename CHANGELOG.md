@@ -1,3 +1,16 @@
+## v1.8.3
+
+Added
+
+- 新增上报播放状态接口
+- 新增更新收听数据概览接口（[#17](https://github.com/ultrazg/xyz/issues/17)）
+- 新增更新收听历史接口（[#17](https://github.com/ultrazg/xyz/issues/17)）
+
+Fixes
+
+- 修复 `查询已收藏单集` 接口异常的问题
+- 修复 `订阅更新列表` 接口异常的问题（[#18](https://github.com/ultrazg/xyz/issues/18)）
+
 ## v1.8.2
 
 Fixes
