@@ -1,12 +1,13 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/constant"
+	"github.com/ultrazg/xyz/utils"
 )
 
 type CommentPrimaryRequestBody struct {
@@ -309,11 +310,29 @@ var RemoveCommentCollect = func(ctx *gin.Context) {
 	utils.ReturnJson(response, ctx)
 }
 
+type CommentCollectListRequestBody struct {
+	LoadMoreKey string `form:"loadMoreKey"`
+}
+
 // CommentCollectList 获取收藏评论列表
 var CommentCollectList = func(ctx *gin.Context) {
+	var params *CommentCollectListRequestBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 	p := map[string]any{}
+
+	if params.LoadMoreKey != "" {
+		p["loadMoreKey"] = params.LoadMoreKey
+	}
+
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	url := constant.BaseUrl + "/v1/comment/collect/list"
