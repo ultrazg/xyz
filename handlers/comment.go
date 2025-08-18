@@ -451,3 +451,149 @@ var CommentLikeUpdate = func(ctx *gin.Context) {
 
 	utils.ReturnJson(response, ctx)
 }
+
+type CommentCreateRequestBody struct {
+	Text             string `json:"text"`
+	Id               string `json:"id"`
+	Type             string `json:"type"`
+	ReplyToCommentId string `json:"replyToCommentId"`
+}
+
+// CommentCreate 发表评论，如果传入 replyToCommentId 参数，则是回复他人的评论，否则是给单集添加评论
+var CommentCreate = func(ctx *gin.Context) {
+	var params *CommentCreateRequestBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+	p := map[string]any{
+		"text": params.Text,
+		"owner": map[string]any{
+			"id":   params.Id,
+			"type": params.Type,
+		},
+	}
+
+	if params.ReplyToCommentId != "" {
+		p["replyToCommentId"] = params.ReplyToCommentId
+	}
+
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/comment/create"
+	headers := map[string]string{
+		"Host":                        "api.xiaoyuzhoufm.com",
+		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
+		"Market":                      "AppStore",
+		"App-BuildNo":                 "1576",
+		"OS":                          "ios",
+		"x-jike-access-token":         XJikeAccessToken,
+		"Manufacturer":                "Apple",
+		"BundleID":                    "app.podcast.cosmos",
+		"Connection":                  "keep-alive",
+		"abtest-info":                 "{}",
+		"Accept-Language":             "zh-Hans-CN;q=1.0, zh-Hant-HK;q=0.9",
+		"X-Online_Host":               "api.xiaoyuzhoufm.com",
+		"Model":                       "iPhone14,2",
+		"app-permissions":             "4",
+		"Accept":                      "*/*",
+		"Content-Type":                "application/json",
+		"App-Version":                 "2.57.1",
+		"WifiConnected":               "true",
+		"OS-Version":                  "17.4.1",
+		"x-custom-xiaoyuzhou-app-dev": "",
+		"Local-Time":                  isoTime,
+		"Timezone":                    "Asia/Shanghai",
+	}
+
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/comment/create", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}
+
+type CommentRemoveRequestBody struct {
+	CommentId string `json:"commentId"`
+}
+
+// CommentRemove 根据 commentId 来删除评论
+var CommentRemove = func(ctx *gin.Context) {
+	var params *CommentRemoveRequestBody
+
+	err := ctx.ShouldBind(&params)
+	if err != nil {
+		utils.ReturnBadRequest(ctx, err)
+
+		return
+	}
+
+	if params.CommentId == "" {
+		utils.ReturnBadRequest(ctx, nil)
+
+		return
+	}
+
+	h := ctx.Request.Header
+	XJikeAccessToken := h.Get("x-jike-access-token")
+	p := map[string]any{
+		"commentId": params.CommentId,
+	}
+	now := time.Now()
+	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
+	url := constant.BaseUrl + "/v1/comment/remove"
+	headers := map[string]string{
+		"Host":                        "api.xiaoyuzhoufm.com",
+		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
+		"Market":                      "AppStore",
+		"App-BuildNo":                 "1576",
+		"OS":                          "ios",
+		"x-jike-access-token":         XJikeAccessToken,
+		"Manufacturer":                "Apple",
+		"BundleID":                    "app.podcast.cosmos",
+		"Connection":                  "keep-alive",
+		"abtest-info":                 "{}",
+		"Accept-Language":             "zh-Hans-CN;q=1.0, zh-Hant-HK;q=0.9",
+		"X-Online-Host":               "api.xiaoyuzhoufm.com",
+		"Model":                       "iPhone14,2",
+		"app-permissions":             "4",
+		"Accept":                      "*/*",
+		"Content-Type":                "application/json",
+		"App-Version":                 "2.57.1",
+		"WifiConnected":               "true",
+		"OS-Version":                  "17.4.1",
+		"x-custom-xiaoyuzhou-app-dev": "",
+		"Local-Time":                  isoTime,
+		"Timezone":                    "Asia/Shanghai",
+	}
+
+	response, code, err := utils.Request(url, http.MethodPost, p, headers)
+	if err != nil {
+		ctx.JSON(code, gin.H{
+			"code": code,
+			"msg":  utils.GetMsg(code),
+			"data": err.Error(),
+		})
+
+		log.Println("/v1/comment/remove", code, utils.GetMsg(code))
+
+		return
+	}
+
+	utils.ReturnJson(response, ctx)
+}

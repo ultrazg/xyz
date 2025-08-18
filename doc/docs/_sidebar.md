@@ -29,6 +29,8 @@
 - [取消已收藏评论](/commentCollectRemove)
 - [查询已收藏评论](/commentCollectList)
 - [点赞/取消点赞评论](/commentLikeUpdate)
+- [创建评论](/commentCreate)
+- [删除评论](/commentRemove)
 - [首页榜单、精选节目、推荐等](/discovery)
 - [首页-刷新「大家都在听」推荐](/refreshEpisodeRecommend)
 - [上报播放状态](/liveStatsReport)
