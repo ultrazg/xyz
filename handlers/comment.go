@@ -378,6 +378,7 @@ var CommentCollectList = func(ctx *gin.Context) {
 type CommentLikeUpdateBody struct {
 	Liked bool   `form:"liked"`
 	Id    string `form:"id"`
+	Type  string `form:"type"`
 }
 
 // CommentLikeUpdate 点赞/取消点赞评论
@@ -391,9 +392,8 @@ var CommentLikeUpdate = func(ctx *gin.Context) {
 		return
 	}
 
-	if params.Id == "" {
+	if params.Id == "" || params.Type == "" || !map[string]bool{"COMMENT": true, "PICK": true}[params.Type] {
 		utils.ReturnBadRequest(ctx, nil)
-
 		return
 	}
 
@@ -403,10 +403,8 @@ var CommentLikeUpdate = func(ctx *gin.Context) {
 		"liked": params.Liked,
 		"target": map[string]string{
 			"id":   params.Id,
-			"type": "COMMENT",
+			"type": params.Type,
 		},
-		"sourcePageName":  15,
-		"currentPageName": 20,
 	}
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
