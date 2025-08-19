@@ -32,6 +32,8 @@
 - [创建评论](/commentCreate)
 - [删除评论](/commentRemove)
 - [首页榜单、精选节目、推荐等](/discovery)
+- [编辑精选历史](/editorPickListHistory)
+- [新节目广场](/pilotDiscoveryList)
 - [首页-刷新「大家都在听」推荐](/refreshEpisodeRecommend)
 - [上报播放状态](/liveStatsReport)
 - [正在收听的人数](/episodeLiveCount)
