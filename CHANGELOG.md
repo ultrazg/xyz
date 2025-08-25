@@ -1,3 +1,9 @@
+## v1.9.1
+
+Fixes
+
+- 调整了 `查询用户的信息 /get_profile` 接口
+
 ## v1.9.0
 
 Added
