@@ -35,7 +35,6 @@
 | avatar         | object | 用户的头像信息                                         |
 | nickname       | string | 昵称                                                   |
 | relation       | string | 是否关注此用户。值为 **FOLLOWING** 即为 **已关注**     |
-| authorship     | array  | 节目信息。存在该字段表示此用户是这个节目的作者（之一） |
 | bio            | string | 个签                                                   |
 | certifications | array  | 认证信息。**kind** 表示认证类别                        |
 | gender         | string | 性别                                                   |
@@ -62,80 +61,6 @@
   code: 200,
   data: {
     data: {
-      authorship: [
-        {
-          author: "最佳阻尼比速扒裤",
-          brief: "就是闲聊就是玩儿",
-          color: {
-            dark: "#F3BB00",
-            light: "#F3BB00",
-            original: "#ffc700",
-          },
-          contacts: [
-            {
-              name: "Rick-021023",
-              note: "加听友群",
-              type: "wechat",
-            },
-          ],
-          description:
-            "一档即将有深度的节目，目前主持人只有一个没有长发且没有口音的“长发文艺男”。。。",
-          episodeCount: 9,
-          hasPopularEpisodes: false,
-          image: {
-            largePicUrl:
-              "https://bts-image.xyzcdn.net/aHR0cHM6Ly9pbWFnZS54eXpjZG4ubmV0L0ZpUjBYa00tSEg1SmJVTWtpOTF3a2RWNHAyanAucG5n.png@large",
-            // ...
-          },
-          isCustomized: false,
-          latestEpisodePubDate: "2024-07-16T11:46:29.705Z",
-          payEpisodeCount: 0,
-          payType: "FREE",
-          permissions: [
-            {
-              name: "SHARE",
-              status: "PERMITTED",
-            },
-          ],
-          pid: "6650891fa17df087bc418685",
-          podcasters: [
-            {
-              avatar: {
-                picture: {
-                  format: "jpeg",
-                  height: 132,
-                  largePicUrl:
-                    "https://image.xyzcdn.net/Fo708mtlBTMf89gC_3j6uflbFdUu@large",
-                  // ...
-                  width: 132,
-                },
-              },
-              gender: "MALE",
-              ipLoc: "吉林",
-              isBlockedByViewer: false,
-              isCancelled: false,
-              isNicknameSet: true,
-              nickname: "最佳阻尼比还可以是汉桑",
-              readTrackInfo: {},
-              relation: "STRANGE",
-              type: "USER",
-              uid: "65af7deaedce67104a359789",
-            },
-            // ...
-          ],
-          readTrackInfo: {},
-          status: "NORMAL",
-          subscriptionCount: 27,
-          subscriptionPush: false,
-          subscriptionPushPriority: "HIGH",
-          subscriptionStar: false,
-          subscriptionStatus: "OFF",
-          syncMode: "SELF_HOSTING",
-          title: "嗯呢嗯呢呗",
-          topicLabels: [],
-          type: "PODCAST",
-        },
-      ],
       avatar: {
         picture: {
           format: "jpeg",
