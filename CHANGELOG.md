@@ -1,3 +1,9 @@
+## v1.9.2
+
+Fixes
+
+- 修复登录接口失效的问题（[#22](https://github.com/ultrazg/xyz/issues/22), [#23](https://github.com/ultrazg/xyz/issues/23), [#24](https://github.com/ultrazg/xyz/issues/24), [#25](https://github.com/ultrazg/xyz/issues/25)）
+
 ## v1.9.1
 
 Fixes
