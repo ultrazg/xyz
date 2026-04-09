@@ -2,23 +2,66 @@ package handlers
 
 import (
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/utils"
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/utils"
 )
 
-type LoginOrSignUpWithSMSRequestBody struct {
+type LoginWithSMSRequestBody struct {
 	AreaCode          string `form:"areaCode" json:"areaCode"`
 	VerifyCode        string `form:"verifyCode" json:"verifyCode"`
 	MobilePhoneNumber string `form:"mobilePhoneNumber" json:"mobilePhoneNumber"`
 }
 
+type LoginWithSMSResponseBody struct {
+	Data struct {
+		User struct {
+			Type   string `json:"type"`
+			UID    string `json:"uid"`
+			Avatar struct {
+				Picture struct {
+					PicURL       string `json:"picUrl"`
+					LargePicURL  string `json:"largePicUrl"`
+					MiddlePicURL string `json:"middlePicUrl"`
+					SmallPicURL  string `json:"smallPicUrl"`
+					ThumbnailURL string `json:"thumbnailUrl"`
+					Format       string `json:"format"`
+					Width        int    `json:"width"`
+					Height       int    `json:"height"`
+				} `json:"picture"`
+			} `json:"avatar"`
+			Nickname      string `json:"nickname"`
+			IsNicknameSet bool   `json:"isNicknameSet"`
+			Bio           string `json:"bio"`
+			Gender        string `json:"gender"`
+			IsCancelled   bool   `json:"isCancelled"`
+			ReadTrackInfo struct {
+			} `json:"readTrackInfo"`
+			IPLoc          string `json:"ipLoc"`
+			BirthYear      int    `json:"birthYear"`
+			Industry       string `json:"industry"`
+			WechatUserInfo struct {
+				NickName string `json:"nickName"`
+			} `json:"wechatUserInfo"`
+			PhoneNumber struct {
+				MobilePhoneNumber string `json:"mobilePhoneNumber"`
+				AreaCode          string `json:"areaCode"`
+			} `json:"phoneNumber"`
+			PhoneNumberNeeded bool `json:"phoneNumberNeeded"`
+			JikeUserInfo      struct {
+				Nickname string `json:"nickname"`
+			} `json:"jikeUserInfo"`
+			IsBlockedByViewer bool `json:"isBlockedByViewer"`
+		} `json:"user"`
+	} `json:"data"`
+}
+
 // Login 登录认证
 var Login = func(ctx *gin.Context) {
-	var params LoginOrSignUpWithSMSRequestBody
+	var params LoginWithSMSRequestBody
 
 	err := ctx.ShouldBind(&params)
 	if err != nil {
@@ -43,22 +86,15 @@ var Login = func(ctx *gin.Context) {
 		"mobilePhoneNumber": params.MobilePhoneNumber,
 	}
 
-	url := constant.BaseUrl + "/v1/auth/loginOrSignUpWithSMS"
+	url := "https://podcaster-api.xiaoyuzhoufm.com/v1/auth/login-with-sms"
 	headers := map[string]string{
-		"Host":            "api.xiaoyuzhoufm.com",
-		"App-BuildNo":     "1576",
-		"OS":              "ios",
-		"Manufacturer":    "Apple",
-		"BundleID":        "app.podcast.cosmos",
-		"abtest-info":     "{\"old_user_discovery_feed\":\"enable\"}",
-		"Accept-Language": "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
-		"Model":           "iPhone14,2",
-		"app-permissions": "4",
-		"Accept":          "*/*",
-		"Content-Type":    "application/json",
-		"App-Version":     "2.57.1",
-		"WifiConnected":   "true",
-		"OS-Version":      "17.4.1",
+		"accept":          "application/json, text/plain, */*",
+		"accept-encoding": "gzip, deflate, br, zstd",
+		"accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+		"content-type":    "application/json;charset=UTF-8",
+		"origin":          "https://podcaster.xiaoyuzhoufm.com",
+		"referer":         "https://podcaster.xiaoyuzhoufm.com/",
+		"user-agent":      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0",
 	}
 	res, code, err := utils.Request(url, http.MethodPost, p, headers)
 	if err != nil {
@@ -68,7 +104,7 @@ var Login = func(ctx *gin.Context) {
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/auth/loginOrSignUpWithSMS", code, utils.GetMsg(code))
+		log.Println(url, code, utils.GetMsg(code))
 
 		return
 	}
@@ -80,7 +116,7 @@ var Login = func(ctx *gin.Context) {
 		return
 	}
 
-	var data map[string]interface{}
+	var data LoginWithSMSResponseBody
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		log.Println("Error parsing response body:", err)
@@ -92,7 +128,7 @@ var Login = func(ctx *gin.Context) {
 		"code": http.StatusOK,
 		"msg":  utils.GetMsg(http.StatusOK),
 		"data": gin.H{
-			"data":                 data,
+			"data":                 data.Data.User,
 			"x-jike-access-token":  res.Header.Get("x-jike-access-token"),
 			"x-jike-refresh-token": res.Header.Get("x-jike-refresh-token"),
 		},

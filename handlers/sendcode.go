@@ -1,12 +1,11 @@
 package handlers
 
 import (
-	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	C "github.com/ultrazg/xyz/constant"
+	"github.com/ultrazg/xyz/utils"
 )
 
 type SendCodeRequestBody struct {
@@ -39,28 +38,15 @@ var SendCode = func(ctx *gin.Context) {
 		"mobilePhoneNumber": params.MobilePhoneNumber,
 		"areaCode":          params.AreaCode,
 	}
-
-	url := C.BaseUrl + "/v1/auth/sendCode"
+	url := "https://podcaster-api.xiaoyuzhoufm.com/v1/auth/send-code"
 	headers := map[string]string{
-		"Host":                        "api.xiaoyuzhoufm.com",
-		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
-		"Market":                      "AppStore",
-		"App-BuildNo":                 "1576",
-		"OS":                          "ios",
-		"Manufacturer":                "Apple",
-		"BundleID":                    "app.podcast.cosmos",
-		"Connection":                  "keep-alive",
-		"abtest-info":                 "{\"old_user_discovery_feed\":\"enable\"}",
-		"Accept-Language":             "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
-		"Model":                       "iPhone14,2",
-		"app-permissions":             "4",
-		"Accept":                      "*/*",
-		"Content-Type":                "application/json",
-		"App-Version":                 "2.57.1",
-		"Accept-Encoding":             "br;q=1.0, gzip;q=0.9, deflate;q=0.8",
-		"WifiConnected":               "true",
-		"OS-Version":                  "17.4.1",
-		"x-custom-xiaoyuzhou-app-dev": "",
+		"accept":          "application/json, text/plain, */*",
+		"accept-encoding": "gzip, deflate, br, zstd",
+		"accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
+		"content-type":    "application/json;charset=UTF-8",
+		"origin":          "https://podcaster.xiaoyuzhoufm.com",
+		"referer":         "https://podcaster.xiaoyuzhoufm.com/",
+		"user-agent":      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36 Edg/146.0.0.0",
 	}
 
 	res, code, err := utils.Request(url, http.MethodPost, p, headers)
@@ -71,7 +57,7 @@ var SendCode = func(ctx *gin.Context) {
 			"data": err.Error(),
 		})
 
-		log.Println("/v1/auth/sendCode", code, utils.GetMsg(code))
+		log.Println(url, code, utils.GetMsg(code))
 
 		return
 	}
