@@ -1,16 +1,22 @@
 package handlers
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/ultrazg/xyz/constant"
-	"github.com/ultrazg/xyz/utils"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/ultrazg/xyz/constant"
+	"github.com/ultrazg/xyz/utils"
 )
 
 type StickerListRequestBody struct {
-	Uid string `json:"uid" form:"uid"`
+	Uid         string                  `form:"uid"`
+	LoadMoreKey *StickerListLoadMoreKey `form:"loadMoreKey"`
+}
+
+type StickerListLoadMoreKey struct {
+	Skip int `form:"skip"`
 }
 
 // StickerList 根据 uid 查询已获得的贴纸
@@ -36,6 +42,13 @@ var StickerList = func(ctx *gin.Context) {
 	p := map[string]any{
 		"uid": params.Uid,
 	}
+
+	if params.LoadMoreKey != nil {
+		p["loadMoreKey"] = map[string]any{
+			"skip": params.LoadMoreKey.Skip,
+		}
+	}
+
 	now := time.Now()
 	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	url := constant.BaseUrl + "/v1/sticker/list"

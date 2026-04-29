@@ -25,12 +25,14 @@
 | 参数 | 必填 | 类型   | 说明          |
 | :--- | :--- | :----- | ------------- |
 | uid  | true | string | 用户的 uid |
+| loadMoreKey  | false | object | 分页查询的条件，由本接口返回，如有该字段则表示存在下一页 |
 
 #### 返回字段
 
 | 返回字段    | 类型   | 说明               |
 | :---------- | :----- | :----------------- |
 | total       | number | 已获得贴纸的数量   |
+| loadMoreKey | object | 分页查询的条件，由本接口返回，如有该字段则表示存在下一页   |
 | description | string | 贴纸描述           |
 | image       | object | 贴纸链接、尺寸信息 |
 | issuer      | string | 贴纸发行人         |
@@ -99,6 +101,9 @@
       },
       // ...
     ],
+    "loadMoreKey": {
+      "skip": 3
+    },
     isPrivate: false,
     total: 4,
   },
