@@ -16,8 +16,7 @@ type SubscriptionBody struct {
 }
 
 type SubscriptionLoadMoreKey struct {
-	SubscribedAt string `form:"subscribedAt" json:"subscribedAt"`
-	Id           string `form:"id" json:"id"`
+	Skip int `form:"skip" json:"skip"`
 }
 
 // Subscription 我的订阅
