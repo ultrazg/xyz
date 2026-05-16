@@ -1,3 +1,9 @@
+## v1.9.4
+
+Fixes
+
+- 修复 `/subscription` 接口分页查询参数异常的问题
+
 ## v1.9.3
 
 Fixes
