@@ -89,7 +89,6 @@ var Login = func(ctx *gin.Context) {
 	url := "https://podcaster-api.xiaoyuzhoufm.com/v1/auth/login-with-sms"
 	headers := map[string]string{
 		"accept":          "application/json, text/plain, */*",
-		"accept-encoding": "gzip, deflate, br, zstd",
 		"accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
 		"content-type":    "application/json;charset=UTF-8",
 		"origin":          "https://podcaster.xiaoyuzhoufm.com",
@@ -112,6 +111,11 @@ var Login = func(ctx *gin.Context) {
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		log.Println("Error reading response body:", err)
+		ctx.JSON(http.StatusBadGateway, gin.H{
+			"code": http.StatusBadGateway,
+			"msg":  utils.GetMsg(http.StatusBadGateway),
+			"data": "failed to read upstream login response",
+		})
 
 		return
 	}
@@ -120,6 +124,11 @@ var Login = func(ctx *gin.Context) {
 	err = json.Unmarshal(body, &data)
 	if err != nil {
 		log.Println("Error parsing response body:", err)
+		ctx.JSON(http.StatusBadGateway, gin.H{
+			"code": http.StatusBadGateway,
+			"msg":  utils.GetMsg(http.StatusBadGateway),
+			"data": "failed to parse upstream login response",
+		})
 
 		return
 	}
