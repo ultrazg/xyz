@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io"
 	"net/http"
 	"time"
 )
@@ -28,31 +27,6 @@ func Request(url, method string, body map[string]any, headers map[string]string)
 		for key, value := range headers {
 			req.Header.Set(key, value)
 		}
-
-		fmt.Println("=========[REQUEST INFO]=========")
-		fmt.Println("Request Url:", url)
-		fmt.Println("Request Method:", method)
-
-		if req.Body != nil {
-			requestBody := req.Body
-			var requestBodyBytes []byte
-			if requestBody != nil {
-				requestBodyBytes, _ = io.ReadAll(requestBody)
-			}
-
-			fmt.Println("Request Body:", string(requestBodyBytes))
-
-			req.Body = io.NopCloser(bytes.NewBuffer(requestBodyBytes))
-		}
-
-		fmt.Println("Request Headers:")
-		for key, values := range req.Header {
-			for _, value := range values {
-				fmt.Printf("%s: %s\n", key, value)
-			}
-		}
-
-		fmt.Println("========================")
 	}
 
 	var resp *http.Response

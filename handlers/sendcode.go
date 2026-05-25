@@ -41,7 +41,6 @@ var SendCode = func(ctx *gin.Context) {
 	url := "https://podcaster-api.xiaoyuzhoufm.com/v1/auth/send-code"
 	headers := map[string]string{
 		"accept":          "application/json, text/plain, */*",
-		"accept-encoding": "gzip, deflate, br, zstd",
 		"accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
 		"content-type":    "application/json;charset=UTF-8",
 		"origin":          "https://podcaster.xiaoyuzhoufm.com",
