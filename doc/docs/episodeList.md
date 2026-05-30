@@ -39,6 +39,7 @@
 |author|string|作者|
 |shownotes|string|注释|
 |description|string|描述|
+|isPrivateMedia|boolean|该单集是否为付费单集，为 true 则需要调用 [获取付费单集音频链接](/privateMedia) 接口查询该单集的音频链接|
 |media|object|播客音频信息（大小、链接等）|
 |podcasters|array|播客嘉宾的信息（头像、昵称和uid等）|
 |loadMoreKey|object|如果存在下一页，则会返回该对象。将这个对象传入请求参数，便可实现分页查询|

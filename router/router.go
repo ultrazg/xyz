@@ -81,4 +81,5 @@ func RegisterRouters(engine *gin.Engine) {
 	engine.POST("/user_preference_get", utils.CheckAccessToken(), handlers.UserPreferenceGet)                             // 获取用户偏好设置
 	engine.POST("/user_preference_update", utils.CheckAccessToken(), handlers.UserPreferenceUpdate)                       // 更新用户偏好设置
 	engine.POST("/relation_update", utils.CheckAccessToken(), handlers.RelationUpdate)                                    // 关注/取关用户
+	engine.POST("/private_media_get", utils.CheckAccessToken(), handlers.GetPrivateMedia)                                 // 获取付费单集音频链接
 }
