@@ -1,3 +1,13 @@
+## v1.10.0
+
+Added
+
+- 新增获取付费单集音频链接接口（[#16](https://github.com/ultrazg/xyz/issues/16), [#27](https://github.com/ultrazg/xyz/issues/27)）
+
+Fixes
+
+- 修复登录相关接口解析异常的问题（[@worldwonderer](https://github.com/worldwonderer)）（[#28](https://github.com/ultrazg/xyz/issues/28)）
+
 ## v1.9.4
 
 Fixes
