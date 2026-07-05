@@ -11,15 +11,21 @@ import (
 )
 
 type CommentPrimaryRequestBody struct {
-	Id          string                     `json:"id" form:"id"`
+	Owner       owner                      `json:"owner" form:"owner"`
 	Order       string                     `json:"order" form:"order"`
 	LoadMoreKey *commentPrimaryLoadMoreKey `json:"loadMoreKey" form:"loadMoreKey"`
+}
+
+type owner struct {
+	Id   string `json:"id" form:"id"`
+	Type string `json:"type" form:"type"`
 }
 
 type commentPrimaryLoadMoreKey struct {
 	Id           string  `json:"id" form:"id"`
 	Direction    string  `json:"direction" form:"direction"`
 	HotSortScore float64 `json:"hotSortScore" form:"hotSortScore"`
+	Section      string  `json:"section" form:"section"`
 }
 
 // CommentPrimary 评论
@@ -36,7 +42,7 @@ var CommentPrimary = func(ctx *gin.Context) {
 	h := ctx.Request.Header
 	XJikeAccessToken := h.Get("x-jike-access-token")
 
-	if params.Order == "" || params.Id == "" {
+	if params.Order == "" || params.Owner.Id == "" || params.Owner.Type == "" {
 		utils.ReturnBadRequest(ctx, nil)
 
 		return
@@ -45,8 +51,8 @@ var CommentPrimary = func(ctx *gin.Context) {
 	p := map[string]any{
 		"order": params.Order,
 		"owner": map[string]any{
-			"id":   params.Id,
-			"type": "EPISODE",
+			"id":   params.Owner.Id,
+			"type": params.Owner.Type,
 		},
 	}
 
@@ -55,34 +61,15 @@ var CommentPrimary = func(ctx *gin.Context) {
 			"hotSortScore": params.LoadMoreKey.HotSortScore,
 			"id":           params.LoadMoreKey.Id,
 			"direction":    params.LoadMoreKey.Direction,
+			"section":      params.LoadMoreKey.Section,
 		}
 	}
 
-	now := time.Now()
-	isoTime := now.Format("2006-01-02T15:04:05Z07:00")
 	url := constant.BaseUrl + "/v1/comment/list-primary"
 	headers := map[string]string{
-		"Host":                        "api.xiaoyuzhoufm.com",
-		"User-Agent":                  "Xiaoyuzhou/2.57.1 (build:1576; iOS 17.4.1)",
-		"Market":                      "AppStore",
-		"App-BuildNo":                 "1576",
-		"OS":                          "ios",
-		"x-jike-access-token":         XJikeAccessToken,
-		"Manufacturer":                "Apple",
-		"BundleID":                    "app.podcast.cosmos",
-		"Connection":                  "keep-alive",
-		"abtest-info":                 "{\"old_user_discovery_feed\":\"enable\"}",
-		"Accept-Language":             "zh-Hant-HK;q=1.0, zh-Hans-CN;q=0.9",
-		"Model":                       "iPhone14,2",
-		"app-permissions":             "4",
-		"Accept":                      "*/*",
-		"Content-Type":                "application/json",
-		"App-Version":                 "2.57.1",
-		"WifiConnected":               "true",
-		"OS-Version":                  "17.4.1",
-		"x-custom-xiaoyuzhou-app-dev": "",
-		"Local-Time":                  isoTime,
-		"Timezone":                    "Asia/Shanghai",
+		"x-jike-access-token": XJikeAccessToken,
+		"x-jike-device-id":    utils.DeviceId,
+		"Content-Type":        "application/json",
 	}
 
 	response, code, err := utils.Request(url, http.MethodPost, p, headers)
@@ -140,6 +127,7 @@ var CommentThread = func(ctx *gin.Context) {
 		"App-BuildNo":                 "1576",
 		"OS":                          "ios",
 		"x-jike-access-token":         XJikeAccessToken,
+		"x-jike-device-id":            utils.DeviceId,
 		"Manufacturer":                "Apple",
 		"BundleID":                    "app.podcast.cosmos",
 		"Connection":                  "keep-alive",

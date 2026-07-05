@@ -24,8 +24,10 @@
 
 | 参数  | 必填 | 类型   | 说明                                                         |
 | :---- | :--- | :----- | ------------------------------------------------------------ |
-| id    | true | string | 单集 eid                                                     |
+| owner.id    | true | string | 单集 eid                                                     |
+| owner.type    | true | string | 类型，传 **EPISODE**                                                     |
 | order | true | string | 排序条件。**全部评论（HOT）**、**最新评论（TIME）**、**时点评论（TIMESTAMP）** |
+| loadMoreKey | false | object | 翻页条件，由接口返回，如果存在该字段则表示存在下一页 |
 
 #### 返回字段
 
@@ -56,13 +58,17 @@
 
 ```javascript
 {
-  "eid": "66467d2c251bd96e6cdcddde",
+  "owner": {
+    id: '66468a29aa440ecaaa8db490',
+    type: 'EPISODE'
+  },
   "order": "HOT",
   // 传入 loadMoreKey 这个参数即可实现分页查询
   loadMoreKey: {
     direction: "NEXT",
     hotSortScore: 0.9648972534042627,
     id: "66484d8d10cd1345ef983a90",
+    section: ''
   },
 }
 ```
