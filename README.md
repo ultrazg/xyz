@@ -1,3 +1,6 @@
+> [!WARNING]
+> 通过第三方登录会使小宇宙账号遭到**风控**或**封禁**，请谨慎使用。
+
 <h1 align="center">
   <img src="./logo.png" alt="xyz" width="100">
   <br>xyz<br>
